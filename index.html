@@ -56,19 +56,18 @@
     ::selection{background:var(--primary);color:#fff;}
     :focus-visible{outline:2px solid var(--primary);outline-offset:4px;}
     [hidden]{display:none!important;}
+    @keyframes el-logo-breathe{
+      0%,100%{opacity:.96;filter:contrast(1.08) saturate(1.02) drop-shadow(0 6px 16px rgba(91,58,92,.14));}
+      50%{opacity:1;filter:contrast(1.18) saturate(1.08) drop-shadow(0 8px 20px rgba(91,58,92,.2));}
+    }
+    @keyframes el-flower-pulse{
+      0%,100%{opacity:.84;transform:scale(1);filter:drop-shadow(0 0 0 rgba(91,58,92,0));}
+      50%{opacity:.92;transform:scale(1.025);filter:drop-shadow(0 4px 10px rgba(91,58,92,.14));}
+    }
 
     .el-app{min-height:100vh;background:var(--page);overflow:hidden;max-width:100vw;}
-    #top{display:flex;flex-direction:column;}
-    #top > section{order:10;}
-    #top > .el-hero{order:0;}
-    #top > .el-categories{order:1;}
-    #top > .el-campaign{order:2;}
-    #top > #products{order:3;}
-    #top > #routine{order:4;}
-    #top > #reviews{order:5;}
-    #top > #account{order:6;}
     .el-container{width:min(1360px,100%);margin:0 auto;padding-inline:var(--gutter);}
-    .el-section{padding:clamp(72px,8vw,128px) 0;}
+    .el-section{padding:clamp(72px,8vw,128px) 0;scroll-margin-top:96px;}
     .el-intro{max-width:650px;margin:0 auto clamp(40px,5vw,64px);text-align:center;}
     .el-eyebrow{display:block;color:var(--primary);font-size:13px;font-weight:700;margin-bottom:12px;}
     .el-title{margin:0;color:var(--ink);font-size:clamp(30px,4.4vw,58px);line-height:1.25;font-weight:700;letter-spacing:0;}
@@ -78,9 +77,10 @@
       position:fixed;
       inset:0 0 auto 0;
       z-index:60;
-      padding:20px var(--gutter);
-      display:grid;
-      grid-template-columns:auto 1fr auto;
+      min-height:88px;
+      padding:12px var(--gutter);
+      display:flex;
+      justify-content:space-between;
       align-items:center;
       gap:clamp(18px,2vw,34px);
       color:var(--ink-deep);
@@ -92,13 +92,69 @@
       background:rgba(255,255,255,.86);
       backdrop-filter:blur(16px);
       border-color:var(--line);
-      padding-block:13px;
+      min-height:74px;
+      padding-block:8px;
       box-shadow:0 18px 50px -34px rgba(30,16,48,.35);
     }
-    .el-brand{grid-column:3;display:inline-flex;align-items:center;gap:10px;justify-self:end;min-width:118px;direction:rtl;}
-    .el-brand img{height:clamp(44px,5.2vw,62px);width:auto;}
-    .el-navlinks{grid-column:2;display:flex;align-items:center;justify-content:center;gap:clamp(14px,1.55vw,28px);font-size:14px;font-weight:500;color:rgba(43,32,56,.82);direction:rtl;}
-    .el-navlink{position:relative;white-space:nowrap;}
+    .el-brand{
+      order:3;
+      flex:0 0 clamp(166px,17vw,232px);
+      align-self:center;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+      height:62px;
+      min-width:0;
+      direction:rtl;
+      padding:0 6px;
+      overflow:visible;
+      border:0;
+      background:transparent;
+    }
+    .el-brand-logo{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:3px;
+      direction:ltr;
+      color:#5f4164;
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:38px;
+      font-weight:800;
+      line-height:.86;
+      letter-spacing:0;
+      transform-origin:center;
+      animation:el-logo-breathe 3.8s ease-in-out infinite;
+      transition:transform .3s var(--ease),filter .3s ease,color .3s ease;
+      text-shadow:0 7px 18px rgba(91,58,92,.18);
+    }
+    .el-brand-flower{
+      width:.52em;
+      height:.52em;
+      color:inherit;
+      opacity:.82;
+      flex:0 0 auto;
+      transform-origin:center;
+      animation:el-flower-pulse 3.8s ease-in-out infinite;
+    }
+    .el-brand-sub{
+      margin-top:5px;
+      color:rgba(91,58,92,.58);
+      font-size:7px;
+      font-weight:800;
+      line-height:1;
+      letter-spacing:0;
+    }
+    .el-brand:hover .el-brand-logo{transform:translateY(-1px) scale(1.018);color:#56375c;filter:contrast(1.18) saturate(1.08) drop-shadow(0 10px 22px rgba(91,58,92,.22));}
+    .el-nav.is-scrolled .el-brand{background:transparent;}
+    .el-nav.is-scrolled .el-brand,
+    .el-nav.is-scrolled .el-actions,
+    .el-nav.is-scrolled .el-navlinks{height:50px;}
+    .el-nav.is-scrolled .el-brand-logo{font-size:31px;}
+    .el-nav.is-scrolled .el-brand-sub{font-size:6px;margin-top:3px;}
+    .el-navlinks{order:2;flex:1 1 auto;align-self:center;min-height:58px;display:flex;align-items:center;justify-content:center;gap:clamp(14px,1.55vw,28px);font-size:14px;font-weight:700;color:rgba(43,32,56,.9);direction:rtl;}
+    .el-navlink{position:relative;white-space:nowrap;display:inline-flex;align-items:center;height:44px;}
     .el-navlink:after{
       content:"";
       position:absolute;
@@ -111,20 +167,22 @@
       transition:left .35s var(--ease);
     }
     .el-navlink:hover:after{left:0;}
-    .el-actions{grid-column:1;display:flex;align-items:center;justify-self:start;gap:clamp(10px,1.3vw,18px);direction:rtl;}
+    .el-actions{order:1;flex:0 0 clamp(158px,17vw,224px);align-self:center;height:58px;display:flex;align-items:center;justify-content:flex-start;gap:clamp(10px,1.3vw,18px);direction:rtl;}
     .el-icon-btn{
-      width:40px;
-      height:40px;
-      border:0;
-      background:transparent;
+      width:44px;
+      height:44px;
+      border:1px solid rgba(43,32,56,.12);
+      background:rgba(255,255,255,.18);
       color:currentColor;
       display:grid;
       place-items:center;
       border-radius:50%;
       position:relative;
-      transition:background .25s ease,color .25s ease,transform .25s ease;
+      box-shadow:0 12px 28px -26px rgba(20,10,40,.38);
+      transition:background .25s ease,color .25s ease,transform .25s ease,border-color .25s ease,box-shadow .25s ease;
     }
-    .el-icon-btn:hover{background:rgba(255,255,255,.72);color:var(--primary);transform:translateY(-1px);}
+    .el-icon-btn svg{width:22px;height:22px;display:block;}
+    .el-icon-btn:hover{background:rgba(255,255,255,.82);border-color:rgba(120,80,205,.28);color:var(--primary);transform:translateY(-2px);box-shadow:0 18px 38px -28px rgba(120,80,205,.55);}
     .el-nav.is-scrolled .el-icon-btn:hover{background:var(--primary-soft);}
     .el-badge{
       position:absolute;
@@ -178,11 +236,11 @@
     .el-hero-logo{width:min(210px,44vw);height:auto;margin:0 auto clamp(18px,2vh,24px);filter:brightness(0) invert(1) drop-shadow(0 10px 28px rgba(0,0,0,.18));opacity:.96;}
     .el-hero h1{
       margin:0;
-      font-size:clamp(42px,8vw,104px);
+      font-size:clamp(38px,7vw,88px);
       line-height:1;
-      font-family:Georgia,serif;
-      font-style:italic;
-      font-weight:500;
+      font-family:Georgia,"Times New Roman",serif;
+      font-style:normal;
+      font-weight:600;
       letter-spacing:0;
       text-shadow:0 18px 54px rgba(0,0,0,.32);
     }
@@ -229,7 +287,7 @@
     .el-hero-stat strong{display:block;color:var(--primary);font-size:20px;font-weight:800;}
     .el-hero-stat span{display:block;margin-top:5px;color:var(--muted);font-size:12px;font-weight:600;}
 
-    .el-categories{padding-top:clamp(96px,10vw,140px);}
+    .el-categories{padding-top:clamp(52px,6vw,88px);}
     .el-campaign{padding-top:clamp(60px,7vw,96px);}
     .el-campaign-grid{
       display:grid;
@@ -246,7 +304,8 @@
       background:var(--card);
       position:relative;
     }
-    .el-campaign-media img{width:100%;height:100%;object-fit:contain;}
+    .el-campaign-media img{width:100%;height:100%;object-fit:contain;transition:transform .8s var(--ease),filter .8s var(--ease);}
+    .el-campaign-media:hover img{transform:scale(1.025);filter:saturate(1.06) contrast(1.04);}
     .el-campaign-copy{
       width:min(860px,100%);
       margin:0 auto;
@@ -269,29 +328,30 @@
     .el-value b{display:block;font-size:14px;margin-bottom:5px;}
     .el-value span{color:var(--muted);font-size:12.5px;}
 
-    .el-category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px;}
+    .el-category-grid{display:flex;flex-wrap:wrap;gap:clamp(12px,1.4vw,20px);}
     .el-cat{
       position:relative;
-      min-height:220px;
-      border:3px solid var(--primary);
-      border-radius:26px;
-      background:var(--card);
-      padding:18px;
-      display:grid;
-      align-content:end;
-      gap:8px;
-      color:var(--ink);
+      flex:1 1 220px;
+      height:clamp(300px,23vw,380px);
+      border:1px solid rgba(255,255,255,.56);
+      border-radius:var(--radius);
+      background:var(--surface);
+      display:block;
+      color:#fff;
       overflow:hidden;
-      transition:transform .35s var(--ease),box-shadow .35s var(--ease);
+      isolation:isolate;
+      box-shadow:0 30px 70px -45px rgba(20,10,40,.55);
+      transition:flex-grow .6s var(--ease),transform .35s var(--ease),box-shadow .35s var(--ease);
     }
-    .el-cat:hover{transform:translateY(-4px);box-shadow:0 24px 56px -32px rgba(60,30,90,.45);}
-    .el-cat:before{content:"";position:absolute;inset:14px;border:1px solid rgba(120,80,205,.18);border-radius:20px;pointer-events:none;}
-    .el-cat:after{display:none;}
-    .el-cat img{display:none;}
-    .el-cat-content{position:relative;z-index:1;display:grid;gap:8px;}
-    .el-pill{display:block;color:var(--primary);font-size:11px;font-weight:800;line-height:1.5;}
-    .el-cat h3{margin:0;font-size:22px;line-height:1.45;}
-    .el-cat p{margin:0;color:var(--muted);font-size:13px;font-weight:500;line-height:1.9;}
+    .el-cat:hover{flex-grow:2.35;transform:translateY(-4px);box-shadow:0 34px 78px -44px rgba(60,30,90,.55);}
+    .el-cat:before{content:"";position:absolute;inset:0;background:var(--cat-grad);z-index:0;}
+    .el-cat:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(20,10,35,.7),rgba(20,10,35,.18) 54%,transparent);z-index:2;pointer-events:none;}
+    .el-cat img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;transition:transform .8s var(--ease),filter .8s var(--ease),opacity .8s var(--ease);}
+    .el-cat:hover img{transform:scale(1.09);filter:saturate(1.08) contrast(1.05);}
+    .el-cat-content{position:absolute;right:18px;left:18px;bottom:18px;z-index:3;display:grid;gap:8px;}
+    .el-pill{display:inline-flex;width:max-content;max-width:100%;align-items:center;border-radius:999px;padding:8px 12px;background:rgba(255,255,255,.74);color:var(--ink);font-size:12px;font-weight:800;line-height:1.5;backdrop-filter:blur(8px);}
+    .el-cat h3{margin:0;font-size:clamp(24px,2.8vw,36px);line-height:1.35;}
+    .el-cat p{margin:0;color:rgba(255,255,255,.86);font-size:14px;font-weight:700;line-height:1.9;}
 
     .el-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:26px;}
     .el-chips{display:flex;align-items:center;gap:10px;overflow:auto;padding-bottom:4px;}
@@ -441,7 +501,7 @@
       position:fixed;
       inset:50% auto auto 50%;
       z-index:96;
-      width:min(940px,calc(100vw - 32px));
+      width:min(560px,calc(100vw - 32px));
       max-height:calc(100svh - 32px);
       overflow:auto;
       transform:translate(-50%,-46%) scale(.98);
@@ -452,7 +512,7 @@
       border-radius:calc(var(--radius) + 12px);
       box-shadow:0 44px 110px -50px rgba(20,10,40,.62);
       display:grid;
-      grid-template-columns:minmax(280px,.92fr) minmax(320px,1fr);
+      grid-template-columns:1fr;
     }
     .el-modal.is-open{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1);}
     .el-modal-media{min-height:540px;background:var(--page);position:relative;overflow:hidden;}
@@ -466,6 +526,8 @@
     .el-tab{flex:1;border:0;border-radius:999px;background:transparent;padding:10px 12px;color:var(--muted);font-weight:800;}
     .el-tab.is-active{background:#fff;color:var(--ink);box-shadow:0 12px 30px -24px rgba(20,10,40,.45);}
     .el-form{display:grid;gap:14px;}
+    .el-auth-note{margin:10px 0 22px;color:var(--muted);font-size:14px;line-height:2;}
+    .el-otp-row{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;direction:ltr;}
     .el-field{display:grid;gap:7px;}
     .el-field label{font-size:12px;color:var(--muted);font-weight:700;}
     .el-field input,.el-field textarea,.el-field select{
@@ -479,6 +541,7 @@
       transition:border-color .25s,box-shadow .25s;
     }
     .el-field input:focus,.el-field textarea:focus,.el-field select:focus{border-color:var(--primary);box-shadow:0 0 0 4px rgba(120,80,205,.11);outline:0;}
+    .el-field input[dir="ltr"]{text-align:left;}
     .el-form-msg{min-height:22px;color:var(--muted);font-size:13px;line-height:1.8;}
 
     .el-toast{
@@ -501,31 +564,38 @@
     }
     .el-toast.is-open{opacity:1;transform:none;}
 
-    .el-reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+    .el-reveal{opacity:1;transform:none;transition:opacity .8s var(--ease),transform .8s var(--ease);}
     .el-reveal.in{opacity:1;transform:none;}
 
     @media (max-width:1100px){
-      .el-nav{grid-template-columns:auto 1fr auto;}
+      .el-brand,.el-actions{flex-basis:150px;}
       .el-navlinks{display:none;}
       .el-campaign-grid,.el-ba-grid{grid-template-columns:1fr;}
-      .el-products,.el-category-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+      .el-products{grid-template-columns:repeat(2,minmax(0,1fr));}
+      .el-cat{flex-basis:calc(50% - 12px);}
       .el-reviews{grid-template-columns:1fr;}
       .el-footer-grid{grid-template-columns:1fr 1fr;}
     }
     @media (max-width:680px){
+      .el-nav{gap:8px;padding-inline:18px;min-height:72px;display:block;}
       .el-actions{gap:4px;}
       .el-icon-btn{width:38px;height:38px;}
-      .el-brand{min-width:82px;}
-      .el-brand img{height:40px;}
+      .el-icon-btn svg{width:20px;height:20px;}
+      .el-brand{position:absolute;left:min(calc(100vw - 150px),240px);right:auto;top:12px;width:132px;height:46px;padding:0;justify-content:center;overflow:visible;background:transparent;border:0;}
+      .el-actions{position:absolute;left:18px;top:12px;width:auto;height:48px;}
+      .el-brand-logo{font-size:28px;}
+      .el-brand-flower{width:.52em;height:.52em;}
+      .el-brand-sub{font-size:5px;margin-top:3px;}
       .el-hero{min-height:91svh;}
       .el-hero-content{padding-top:96px;}
       .el-hero p{max-width:320px;}
       .el-hero-strip{grid-template-columns:repeat(2,1fr);right:20px;left:20px;}
-      .el-categories{padding-top:128px;}
+      .el-categories{padding-top:68px;}
       .el-campaign{padding-top:64px;}
       .el-campaign-media{min-height:0;}
-      .el-values,.el-products,.el-category-grid,.el-footer-grid{grid-template-columns:1fr;}
-      .el-cat{min-height:220px;}
+      .el-values,.el-products,.el-footer-grid{grid-template-columns:1fr;}
+      .el-category-grid{display:grid;grid-template-columns:1fr;}
+      .el-cat{height:320px;min-height:0;}
       .el-ba-frame{min-height:420px;}
       .el-auth-band{grid-template-columns:1fr;}
       .el-modal{grid-template-columns:1fr;}
@@ -535,6 +605,7 @@
     }
     @media (prefers-reduced-motion:reduce){
       *,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.001ms!important;}
+      .el-brand-logo,.el-brand-flower{animation:none!important;}
       .el-hero video{display:none;}
       .el-hero{background:#d9cfe3 url("assets/eloria/ba-after.jpeg") center/cover no-repeat;}
     }
@@ -544,7 +615,21 @@
   <div class="el-app" id="app">
     <nav class="el-nav" id="nav" aria-label="ناوبری اصلی">
       <a class="el-brand" href="#top" aria-label="ELORIA">
-        <img src="assets/eloria/eloria-logo.svg" alt="ELORIA">
+        <span class="el-brand-logo" aria-hidden="true">
+          <span>El</span>
+          <svg class="el-brand-flower" viewBox="0 0 40 40" focusable="false">
+            <g fill="currentColor" transform="translate(20 20)">
+              <ellipse cx="0" cy="-9.2" rx="4.6" ry="9.4"></ellipse>
+              <ellipse cx="0" cy="-9.2" rx="4.6" ry="9.4" transform="rotate(72)"></ellipse>
+              <ellipse cx="0" cy="-9.2" rx="4.6" ry="9.4" transform="rotate(144)"></ellipse>
+              <ellipse cx="0" cy="-9.2" rx="4.6" ry="9.4" transform="rotate(216)"></ellipse>
+              <ellipse cx="0" cy="-9.2" rx="4.6" ry="9.4" transform="rotate(288)"></ellipse>
+              <circle r="3.1"></circle>
+            </g>
+          </svg>
+          <span>ria</span>
+        </span>
+        <span class="el-brand-sub" aria-hidden="true">COSMETICS</span>
       </a>
       <div class="el-navlinks">
         <a class="el-navlink" href="#categories">فروشگاه</a>
@@ -575,7 +660,7 @@
           <h1>ELORIA</h1>
           <p>درخشش، پدیدار می‌شود. فروشگاه منتخب لوازم آرایشی وارداتی با تجربه خرید آرام، سریع و اصیل.</p>
           <div class="el-hero-actions">
-            <a class="el-btn el-btn-primary" href="#products">
+            <a class="el-btn el-btn-primary" href="#categories">
               خرید محصولات
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg>
             </a>
@@ -587,6 +672,34 @@
           <div class="el-hero-stat"><strong>۴۸h</strong><span>ارسال سریع</span></div>
           <div class="el-hero-stat"><strong>۴.۹</strong><span>رضایت خریداران</span></div>
           <div class="el-hero-stat"><strong>+۲۴۰</strong><span>محصول منتخب</span></div>
+        </div>
+      </section>
+
+      <section class="el-section el-categories" id="categories" data-screen-label="Categories">
+        <div class="el-container">
+          <div class="el-intro el-reveal">
+            <span class="el-eyebrow">آیینِ زیبایی</span>
+            <h2 class="el-title">خرید محصولات جادویی</h2>
+            <p class="el-lead">از صورت تا چشم — هر آنچه برای ظاهرِ کامل لازم دارید، یک‌جا.</p>
+          </div>
+          <div class="el-category-grid">
+            <a class="el-cat el-reveal" href="#products" data-filter-link="face" style="--cat-grad:radial-gradient(120% 90% at 30% 20%,#fbeadd 0%,#f0c3a6 44%,#cf9270 100%);">
+              <img src="assets/eloria/cat-face.png" alt="دسته صورت">
+              <div class="el-cat-content"><span class="el-pill">کرم‌پودر و پودر</span><h3>صورت</h3><p>۱۲۰ محصول</p></div>
+            </a>
+            <a class="el-cat el-reveal" href="#products" data-filter-link="lip" style="--cat-grad:radial-gradient(120% 90% at 30% 20%,#f6d9e4 0%,#e7a9c3 42%,#b0577f 100%);">
+              <img src="assets/eloria/cat-lip.webp" alt="دسته لب">
+              <div class="el-cat-content"><span class="el-pill">رژ و بالم</span><h3>لب</h3><p>۸۶ محصول</p></div>
+            </a>
+            <a class="el-cat el-reveal" href="#products" data-filter-link="all" style="--cat-grad:radial-gradient(120% 90% at 30% 20%,#f2e6d6 0%,#d8b78e 44%,#a67a4c 100%);">
+              <img src="assets/eloria/cat-brow.jpeg" alt="دسته ابرو">
+              <div class="el-cat-content"><span class="el-pill">مداد و ژل</span><h3>ابرو</h3><p>۴۴ محصول</p></div>
+            </a>
+            <a class="el-cat el-reveal" href="#products" data-filter-link="eye" style="--cat-grad:radial-gradient(120% 90% at 30% 20%,#ece7f6 0%,#c4b6e6 44%,#7b63b3 100%);">
+              <img src="assets/eloria/cat-eye.png" alt="دسته چشم">
+              <div class="el-cat-content"><span class="el-pill">سایه و خط چشم</span><h3>چشم</h3><p>۹۸ محصول</p></div>
+            </a>
+          </div>
         </div>
       </section>
 
@@ -612,30 +725,6 @@
               </div>
             </div>
             <a class="el-btn el-btn-primary" href="#categories">دیدن دسته‌بندی‌ها</a>
-          </div>
-        </div>
-      </section>
-
-      <section class="el-section el-categories" id="categories" data-screen-label="Categories">
-        <div class="el-container">
-          <div class="el-intro el-reveal">
-            <span class="el-eyebrow">فروشگاه</span>
-            <h2 class="el-title">دسته‌بندی‌های اصلی</h2>
-            <p class="el-lead">هر دسته مثل نسخه کوچک قاب اصلی طراحی شده است؛ ساده، یاسی و مستقیم به مسیر خرید.</p>
-          </div>
-          <div class="el-category-grid">
-            <a class="el-cat el-reveal" href="#products" data-filter-link="face" style="--cat-grad:radial-gradient(120% 90% at 30% 20%,#fbeadd 0%,#f0c3a6 44%,#cf9270 100%);">
-              <div class="el-cat-content"><span class="el-pill">MAKEUP</span><h3>آرایش صورت</h3><p>بیس، رژگونه، لب و چشم.</p></div>
-            </a>
-            <a class="el-cat el-reveal" href="#products" data-filter-link="lip" style="--cat-grad:radial-gradient(120% 90% at 30% 20%,#f6d9e4 0%,#e7a9c3 42%,#b0577f 100%);">
-              <div class="el-cat-content"><span class="el-pill">LIPS</span><h3>رنگ لب</h3><p>رژ، بالم و رنگ‌های روزانه.</p></div>
-            </a>
-            <a class="el-cat el-reveal" href="#products" data-filter-link="skin" style="--cat-grad:radial-gradient(120% 90% at 30% 20%,#f2e6d6 0%,#d8b78e 44%,#a67a4c 100%);">
-              <div class="el-cat-content"><span class="el-pill">SKINCARE</span><h3>مراقبت پوست</h3><p>سرم، کرم و آماده‌سازی پوست.</p></div>
-            </a>
-            <a class="el-cat el-reveal" href="#products" data-filter-link="eye" style="--cat-grad:radial-gradient(120% 90% at 30% 20%,#ece7f6 0%,#c4b6e6 44%,#7b63b3 100%);">
-              <div class="el-cat-content"><span class="el-pill">EYES</span><h3>آرایش چشم</h3><p>سایه، خط چشم و فرم نهایی.</p></div>
-            </a>
           </div>
         </div>
       </section>
@@ -763,19 +852,13 @@
 
   <div class="el-modal-overlay" id="authOverlay" data-action="close-auth"></div>
   <section class="el-modal" id="authModal" aria-label="ورود و ثبت نام" aria-hidden="true">
-    <div class="el-modal-media">
-      <img src="assets/eloria/cat-face.png" alt="">
-      <div class="el-modal-copy">
-        <img src="assets/eloria/eloria-logo.svg" alt="">
-        <p>ورود سریع برای ذخیره سبد خرید و ادامه تجربه فروشگاه.</p>
-      </div>
-    </div>
     <div class="el-modal-panel">
       <button class="el-close" type="button" data-action="close-auth" aria-label="بستن">
         <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
       </button>
       <span class="el-eyebrow">حساب ELORIA</span>
-      <h2 class="el-title" style="font-size:clamp(27px,3.2vw,42px);">ورود به فروشگاه</h2>
+      <h2 class="el-title" style="font-size:clamp(27px,3.2vw,42px);">ورود با شماره موبایل</h2>
+      <p class="el-auth-note">برای ورود یا ثبت نام، شماره موبایل را وارد کنید و کد تایید نمونه را بزنید.</p>
       <div class="el-tabs" role="tablist">
         <button class="el-tab is-active" type="button" data-auth-tab="login">ورود</button>
         <button class="el-tab" type="button" data-auth-tab="register">ثبت نام</button>
@@ -786,15 +869,15 @@
           <input id="authName" name="name" type="text" autocomplete="name" placeholder="نام شما" hidden>
         </div>
         <div class="el-field">
-          <label for="authEmail">ایمیل</label>
-          <input id="authEmail" name="email" type="email" autocomplete="email" placeholder="name@example.com" required>
+          <label for="authPhone">شماره موبایل</label>
+          <input id="authPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" placeholder="09123456789" required>
         </div>
-        <div class="el-field">
-          <label for="authPassword">رمز عبور</label>
-          <input id="authPassword" name="password" type="password" autocomplete="current-password" placeholder="حداقل ۶ کاراکتر" required minlength="6">
+        <div class="el-field" id="otpField" hidden>
+          <label for="authOtp">کد تایید</label>
+          <input id="authOtp" name="otp" type="text" inputmode="numeric" autocomplete="one-time-code" dir="ltr" placeholder="کد ۵ رقمی" maxlength="5">
         </div>
-        <button class="el-btn el-btn-primary" type="submit" id="authSubmit">ورود</button>
-        <button class="el-btn" type="button" id="quickLogin">ورود سریع نمونه</button>
+        <button class="el-btn el-btn-primary" type="submit" id="authSubmit">دریافت کد تایید</button>
+        <button class="el-btn" type="button" id="resetOtp" hidden>تغییر شماره موبایل</button>
         <div class="el-form-msg" id="authMsg" role="status" aria-live="polite"></div>
       </form>
     </div>
@@ -814,7 +897,9 @@
       cart: readJson("eloria_cart", {}),
       user: readJson("eloria_user", null),
       filter: "all",
-      authMode: "login"
+      authMode: "login",
+      otpSent: false,
+      otpCode: ""
     };
 
     const els = {
@@ -832,11 +917,12 @@
       authForm: document.getElementById("authForm"),
       authName: document.getElementById("authName"),
       nameLabel: document.getElementById("nameLabel"),
-      authEmail: document.getElementById("authEmail"),
-      authPassword: document.getElementById("authPassword"),
+      authPhone: document.getElementById("authPhone"),
+      otpField: document.getElementById("otpField"),
+      authOtp: document.getElementById("authOtp"),
       authSubmit: document.getElementById("authSubmit"),
       authMsg: document.getElementById("authMsg"),
-      quickLogin: document.getElementById("quickLogin"),
+      resetOtp: document.getElementById("resetOtp"),
       accountText: document.getElementById("accountText"),
       baAfter: document.getElementById("baAfter"),
       baLine: document.getElementById("baLine"),
@@ -855,6 +941,23 @@
     }
     function faDigits(value){
       return String(value).replace(/[0-9]/g, d => "۰۱۲۳۴۵۶۷۸۹"[Number(d)]);
+    }
+    function enDigits(value){
+      return String(value)
+        .replace(/[۰-۹]/g, d => "۰۱۲۳۴۵۶۷۸۹".indexOf(d))
+        .replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d));
+    }
+    function normalizePhone(value){
+      const digits = enDigits(value).replace(/[^\d+]/g, "");
+      if(digits.startsWith("+98")) return "0" + digits.slice(3);
+      if(digits.startsWith("98")) return "0" + digits.slice(2);
+      return digits;
+    }
+    function isValidMobile(value){
+      return /^09\d{9}$/.test(normalizePhone(value));
+    }
+    function generateOtp(){
+      return String(Math.floor(10000 + Math.random() * 90000));
     }
     function money(value){
       return faDigits(Math.round(value).toLocaleString("en-US").replace(/,/g,"٬")) + " تومان";
@@ -959,13 +1062,15 @@
       els.authOverlay.classList.add("is-open");
       els.authModal.setAttribute("aria-hidden","false");
       document.body.classList.add("modal-open");
-      setTimeout(() => els.authEmail.focus(), 60);
+      setTimeout(() => els.authPhone.focus(), 60);
     }
     function closeAuth(){
       els.authModal.classList.remove("is-open");
       els.authOverlay.classList.remove("is-open");
       els.authModal.setAttribute("aria-hidden","true");
       document.body.classList.remove("modal-open");
+      resetOtpFlow();
+      els.authForm.reset();
     }
     function setAuthMode(mode){
       state.authMode = mode;
@@ -974,9 +1079,20 @@
       els.authName.hidden = !register;
       els.nameLabel.hidden = !register;
       els.authName.required = register;
-      els.authSubmit.textContent = register ? "ثبت نام" : "ورود";
-      els.authPassword.autocomplete = register ? "new-password" : "current-password";
+      resetOtpFlow();
+    }
+    function resetOtpFlow(){
+      state.otpSent = false;
+      state.otpCode = "";
+      els.otpField.hidden = true;
+      els.authOtp.required = false;
+      els.authOtp.value = "";
+      els.authPhone.disabled = false;
+      els.authName.disabled = false;
+      els.resetOtp.hidden = true;
+      els.authSubmit.textContent = "دریافت کد تایید";
       els.authMsg.textContent = "";
+      els.authMsg.style.color = "var(--muted)";
     }
     function loginUser(user){
       state.user = user;
@@ -987,7 +1103,8 @@
     }
     function updateAccount(){
       if(state.user){
-        els.accountText.textContent = `${state.user.name} وارد شده‌اید. سبد خرید شما در همین مرورگر ذخیره می‌شود.`;
+        const contact = state.user.phone ? ` با شماره ${faDigits(state.user.phone)}` : "";
+        els.accountText.textContent = `${state.user.name}${contact} وارد شده‌اید. سبد خرید شما در همین مرورگر ذخیره می‌شود.`;
       }else{
         els.accountText.textContent = "برای ذخیره سبد خرید، سفارش نمونه و مشاهده وضعیت ورود، وارد حساب ELORIA شوید.";
       }
@@ -1039,27 +1156,45 @@
     });
     els.authForm.addEventListener("submit", event => {
       event.preventDefault();
-      const email = els.authEmail.value.trim();
-      const pass = els.authPassword.value.trim();
-      const name = state.authMode === "register" ? els.authName.value.trim() : "کاربر ELORIA";
-      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
-        els.authMsg.textContent = "ایمیل معتبر وارد کنید.";
-        els.authMsg.style.color = "var(--error)";
-        return;
-      }
-      if(pass.length < 6){
-        els.authMsg.textContent = "رمز عبور باید حداقل ۶ کاراکتر باشد.";
-        els.authMsg.style.color = "var(--error)";
-        return;
-      }
-      if(state.authMode === "register" && name.length < 2){
+      const phone = normalizePhone(els.authPhone.value);
+      const register = state.authMode === "register";
+      const name = register ? els.authName.value.trim() : "کاربر ELORIA";
+      if(register && name.length < 2){
         els.authMsg.textContent = "نام را وارد کنید.";
         els.authMsg.style.color = "var(--error)";
         return;
       }
-      loginUser({name,email,createdAt:new Date().toISOString()});
+      if(!isValidMobile(phone)){
+        els.authMsg.textContent = "شماره موبایل معتبر وارد کنید؛ مثل 09123456789.";
+        els.authMsg.style.color = "var(--error)";
+        return;
+      }
+      if(!state.otpSent){
+        state.otpCode = generateOtp();
+        state.otpSent = true;
+        els.otpField.hidden = false;
+        els.authOtp.required = true;
+        els.authPhone.disabled = true;
+        els.authName.disabled = true;
+        els.resetOtp.hidden = false;
+        els.authSubmit.textContent = register ? "تایید و ثبت نام" : "تایید و ورود";
+        els.authMsg.textContent = `کد تایید نمونه: ${faDigits(state.otpCode)}`;
+        els.authMsg.style.color = "var(--primary)";
+        els.authOtp.focus();
+        return;
+      }
+      const otp = enDigits(els.authOtp.value).replace(/\D/g, "");
+      if(otp !== state.otpCode){
+        els.authMsg.textContent = "کد تایید وارد شده درست نیست.";
+        els.authMsg.style.color = "var(--error)";
+        return;
+      }
+      loginUser({name,phone,createdAt:new Date().toISOString()});
     });
-    els.quickLogin.addEventListener("click", () => loginUser({name:"کاربر نمونه",email:"demo@eloria.test",createdAt:new Date().toISOString()}));
+    els.resetOtp.addEventListener("click", () => {
+      resetOtpFlow();
+      els.authPhone.focus();
+    });
     els.checkoutBtn.addEventListener("click", () => {
       const count = Object.values(state.cart).reduce((sum,item) => sum + item.qty, 0);
       if(!count){ showToast("سبد خرید خالی است."); return; }
@@ -1086,7 +1221,6 @@
     renderCart();
     updateAccount();
     setAuthMode("login");
-    if(!state.user) setTimeout(openAuth, 520);
   </script>
 </body>
 </html>
