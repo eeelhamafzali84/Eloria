@@ -423,20 +423,25 @@
       transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s ease;
     }
     .el-latest-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-card);border-color:rgba(120,80,205,.28);}
-    .el-latest-card img{
+    .el-latest-thumb{
+      position:relative;
+      border-radius:calc(var(--radius) - 6px);
+      overflow:hidden;
+      background:var(--surface);
+    }
+    .el-latest-thumb img{
       display:block;
       width:100%;
       aspect-ratio:4/5;
       object-fit:cover;
       background:var(--surface);
-      border-radius:calc(var(--radius) - 6px);
       transition:transform .7s var(--ease);
     }
-    .el-latest-card:hover img{transform:scale(1.06);}
+    .el-latest-card:hover .el-latest-thumb img{transform:scale(1.06);}
     .el-latest-info{margin-top:6px;padding:14px 16px 16px;background:#fff;border-radius:calc(var(--radius) - 8px);}
     .el-latest-info b{display:block;color:var(--ink);font-size:15px;line-height:1.7;}
     .el-latest-info span{display:block;margin-top:4px;color:var(--primary);font-size:12px;font-weight:800;}
-    .el-latest-add{width:100%;margin-top:14px;}
+    .el-latest-add{width:auto;margin-top:14px;padding-inline:14px;font-size:12.5px;}
     .el-products{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;}
     .el-card{
       background:var(--surface);
@@ -454,8 +459,10 @@
     .el-thumb img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease);}
     .el-card:hover .el-thumb img{transform:scale(1.08);}
     .el-card-badge{position:absolute;top:12px;right:12px;background:rgba(255,255,255,.82);backdrop-filter:blur(8px);border-radius:999px;padding:7px 10px;font-size:11px;font-weight:800;color:var(--primary);}
-    .el-wish{position:absolute;top:10px;left:10px;background:rgba(255,255,255,.78);color:var(--ink);border:0;border-radius:50%;width:38px;height:38px;display:grid;place-items:center;backdrop-filter:blur(8px);}
-    .el-wish.is-on{color:var(--primary);}
+    .el-wish{position:absolute;top:10px;left:10px;background:rgba(255,255,255,.78);color:var(--ink);border:0;border-radius:50%;width:38px;height:38px;display:grid;place-items:center;backdrop-filter:blur(8px);transition:transform .25s var(--ease),background .25s ease,color .25s ease;}
+    .el-wish svg{display:block;}
+    .el-wish:hover,.el-wish.is-on{background:#fff;color:var(--error);transform:translateY(-1px);}
+    .el-wish.is-on svg{fill:currentColor;}
     .el-card-body{margin-top:6px;padding:16px;background:#fff;border-radius:calc(var(--radius) - 8px);display:flex;flex-direction:column;gap:10px;flex:1;}
     .el-brand-name{color:var(--primary);font-size:12px;font-weight:800;}
     .el-product-title{margin:0;line-height:1.7;font-size:15.5px;min-height:54px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
@@ -465,7 +472,7 @@
     .el-swatch{width:18px;height:18px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px var(--line);background:var(--swatch);}
     .el-price-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;}
     .el-price{font-weight:800;color:var(--ink);}
-    .el-add{border:0;border-radius:12px;background:var(--ink);color:#fff;padding:10px 13px;font-weight:800;transition:background .25s,transform .25s;}
+    .el-add{border:0;border-radius:12px;background:var(--ink);color:#fff;padding:8px 12px;font-size:12.5px;font-weight:800;transition:background .25s,transform .25s;}
     .el-add:hover{background:var(--primary);transform:translateY(-2px);}
 
     .el-ba-grid{display:grid;grid-template-columns:minmax(0,.92fr) minmax(320px,.58fr);gap:clamp(22px,4vw,50px);align-items:center;}
@@ -796,20 +803,32 @@
               </button>
               <div class="el-latest-track" id="latestTrack" tabindex="0">
                 <article class="el-latest-card">
-                  <img src="assets/eloria/product-1.webp" alt="پودر فیکس کننده مات" loading="lazy">
-                  <div class="el-latest-info"><b>پودر فیکس کننده مات</b><span>SHEGLAM</span><button class="el-add el-latest-add" type="button" data-add="p1">افزودن به سبد خرید</button></div>
+                  <div class="el-latest-thumb">
+                    <img src="assets/eloria/product-1.webp" alt="پودر فیکس کننده مات" loading="lazy">
+                    <button class="el-wish" type="button" data-favorite="p1" aria-label="افزودن پودر فیکس کننده مات به علاقه‌مندی‌ها"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z"></path></svg></button>
+                  </div>
+                  <div class="el-latest-info"><b>پودر فیکس کننده مات</b><span>SHEGLAM</span><button class="el-add el-latest-add" type="button" data-add="p1">افزودن</button></div>
                 </article>
                 <article class="el-latest-card">
-                  <img src="assets/eloria/product-2.webp" alt="رژگونه و رژ لب کوشن" loading="lazy">
-                  <div class="el-latest-info"><b>رژگونه و رژ لب کوشن</b><span>SHEGLAM</span><button class="el-add el-latest-add" type="button" data-add="p2">افزودن به سبد خرید</button></div>
+                  <div class="el-latest-thumb">
+                    <img src="assets/eloria/product-2.webp" alt="رژگونه و رژ لب کوشن" loading="lazy">
+                    <button class="el-wish" type="button" data-favorite="p2" aria-label="افزودن رژگونه و رژ لب کوشن به علاقه‌مندی‌ها"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z"></path></svg></button>
+                  </div>
+                  <div class="el-latest-info"><b>رژگونه و رژ لب کوشن</b><span>SHEGLAM</span><button class="el-add el-latest-add" type="button" data-add="p2">افزودن</button></div>
                 </article>
                 <article class="el-latest-card">
-                  <img src="assets/eloria/product-3.webp" alt="سرم آبرسان نیاسیناماید" loading="lazy">
-                  <div class="el-latest-info"><b>سرم آبرسان نیاسیناماید</b><span>SHEGLAM</span><button class="el-add el-latest-add" type="button" data-add="p3">افزودن به سبد خرید</button></div>
+                  <div class="el-latest-thumb">
+                    <img src="assets/eloria/product-3.webp" alt="سرم آبرسان نیاسیناماید" loading="lazy">
+                    <button class="el-wish" type="button" data-favorite="p3" aria-label="افزودن سرم آبرسان نیاسیناماید به علاقه‌مندی‌ها"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z"></path></svg></button>
+                  </div>
+                  <div class="el-latest-info"><b>سرم آبرسان نیاسیناماید</b><span>SHEGLAM</span><button class="el-add el-latest-add" type="button" data-add="p3">افزودن</button></div>
                 </article>
                 <article class="el-latest-card">
-                  <img src="assets/eloria/product-4.webp" alt="پالت سایه Love N Taupe" loading="lazy">
-                  <div class="el-latest-info"><b>پالت سایه Love N Taupe</b><span>SHEGLAM</span><button class="el-add el-latest-add" type="button" data-add="p4">افزودن به سبد خرید</button></div>
+                  <div class="el-latest-thumb">
+                    <img src="assets/eloria/product-4.webp" alt="پالت سایه Love N Taupe" loading="lazy">
+                    <button class="el-wish" type="button" data-favorite="p4" aria-label="افزودن پالت سایه Love N Taupe به علاقه‌مندی‌ها"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z"></path></svg></button>
+                  </div>
+                  <div class="el-latest-info"><b>پالت سایه Love N Taupe</b><span>SHEGLAM</span><button class="el-add el-latest-add" type="button" data-add="p4">افزودن</button></div>
                 </article>
               </div>
               <button class="el-latest-scroll el-latest-scroll-next" type="button" data-latest-scroll="next" aria-label="محصولات بعدی">
@@ -976,6 +995,7 @@
 
     const state = {
       cart: readJson("eloria_cart", {}),
+      favorites: readJson("eloria_favorites", {}),
       user: readJson("eloria_user", null),
       filter: "all",
       authMode: "login",
@@ -1066,7 +1086,7 @@
           <div class="el-thumb">
             <img src="${p.img}" alt="${p.name}" loading="lazy">
             <span class="el-card-badge">${p.badge}</span>
-            <button class="el-wish" type="button" data-add="${p.id}" aria-label="افزودن ${p.name} به سبد">${icon("bag")}</button>
+            <button class="el-wish${state.favorites[p.id] ? " is-on" : ""}" type="button" data-favorite="${p.id}" aria-label="افزودن ${p.name} به علاقه‌مندی‌ها">${icon("heart")}</button>
           </div>
           <div class="el-card-body">
             <span class="el-brand-name">${p.brand}</span>
@@ -1115,6 +1135,22 @@
       renderCart();
       openCart();
       showToast(`${product.name} به سبد خرید اضافه شد.`);
+    }
+
+    function syncFavoriteButtons(){
+      document.querySelectorAll("[data-favorite]").forEach(btn => {
+        btn.classList.toggle("is-on", !!state.favorites[btn.dataset.favorite]);
+      });
+    }
+
+    function toggleFavorite(id){
+      const product = products.find(p => p.id === id);
+      if(!product) return;
+      if(state.favorites[id]) delete state.favorites[id];
+      else state.favorites[id] = true;
+      saveJson("eloria_favorites", state.favorites);
+      syncFavoriteButtons();
+      showToast(state.favorites[id] ? `${product.name} به انتخاب‌های شما اضافه شد.` : `${product.name} از انتخاب‌های شما حذف شد.`);
     }
 
     function changeQty(id, delta){
@@ -1215,6 +1251,8 @@
           track.scrollBy({left: latestScroll.dataset.latestScroll === "next" ? -amount : amount, behavior:"smooth"});
         }
       }
+      const favoriteTarget = event.target.closest("[data-favorite]");
+      if(favoriteTarget) toggleFavorite(favoriteTarget.dataset.favorite);
       const addTarget = event.target.closest("[data-add]");
       if(addTarget) addToCart(addTarget.dataset.add);
       const qtyTarget = event.target.closest("[data-qty]");
@@ -1308,6 +1346,7 @@
 
     renderProducts();
     renderCart();
+    syncFavoriteButtons();
     updateAccount();
     setAuthMode("login");
   </script>
