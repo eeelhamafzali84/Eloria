@@ -1,0 +1,170 @@
+[
+  {
+    "uuid": "55e96531-10f4-440c-8d3f-39f26695c64a",
+    "file": "assets/eloria/eloria-logo.svg",
+    "mime": "image/svg+xml",
+    "bytes": 14663,
+    "referenced": true,
+    "external_id": ""
+  },
+  {
+    "uuid": "0b4bae8b-0378-405c-b416-322b893ee6c8",
+    "file": "assets/eloria/ba-before.jpeg",
+    "mime": "image/jpeg",
+    "bytes": 78240,
+    "referenced": true,
+    "external_id": "ba-before.jpeg"
+  },
+  {
+    "uuid": "30a414f1-8cc2-437c-a871-cb0cb55828ba",
+    "file": "assets/eloria/ba-after.jpeg",
+    "mime": "image/jpeg",
+    "bytes": 76786,
+    "referenced": true,
+    "external_id": "ba-after.jpeg"
+  },
+  {
+    "uuid": "a8e69a71-fd96-4396-a043-f98d89060791",
+    "file": "assets/eloria/image-a8e69a71.png",
+    "mime": "image/png",
+    "bytes": 2053026,
+    "referenced": true,
+    "external_id": ""
+  },
+  {
+    "uuid": "c12302c6-4cb0-4179-b4dc-cad5340e1b67",
+    "file": "assets/eloria/product-3.webp",
+    "mime": "image/webp",
+    "bytes": 10852,
+    "referenced": false,
+    "external_id": "product-3.webp"
+  },
+  {
+    "uuid": "c506d383-a889-4612-99d8-1a60b8734981",
+    "file": "assets/eloria/product-2.webp",
+    "mime": "image/webp",
+    "bytes": 11072,
+    "referenced": false,
+    "external_id": "product-2.webp"
+  },
+  {
+    "uuid": "1afecfdd-6638-4a9f-bdb0-ddb119221cc6",
+    "file": "assets/eloria/product-1.webp",
+    "mime": "image/webp",
+    "bytes": 8626,
+    "referenced": false,
+    "external_id": "product-1.webp"
+  },
+  {
+    "uuid": "a9ca0185-2ce2-43ab-807b-c7a452164e68",
+    "file": "assets/eloria/cat-lip.webp",
+    "mime": "image/webp",
+    "bytes": 99630,
+    "referenced": false,
+    "external_id": "cat-lip.webp"
+  },
+  {
+    "uuid": "1e8f9246-2cb3-4a52-9279-ef81955b9c75",
+    "file": "assets/eloria/product-4.webp",
+    "mime": "image/webp",
+    "bytes": 41844,
+    "referenced": false,
+    "external_id": "product-4.webp"
+  },
+  {
+    "uuid": "739259c8-34f0-4acf-b24e-a8a6a8d7074a",
+    "file": "assets/eloria/cat-brow.jpeg",
+    "mime": "image/jpeg",
+    "bytes": 562991,
+    "referenced": false,
+    "external_id": "cat-brow.jpeg"
+  },
+  {
+    "uuid": "39aff47e-a842-4a90-9154-29535f23d812",
+    "file": "assets/eloria/cat-eye.png",
+    "mime": "image/png",
+    "bytes": 2525203,
+    "referenced": false,
+    "external_id": "cat-eye.png"
+  },
+  {
+    "uuid": "cae4b3cd-d92d-4cee-a598-1af0c43dd929",
+    "file": "assets/eloria/cat-face.png",
+    "mime": "image/png",
+    "bytes": 2261190,
+    "referenced": false,
+    "external_id": "cat-face.png"
+  },
+  {
+    "uuid": "db85e5b0-fd7c-4472-bb39-47598d22521e",
+    "file": "assets/eloria/hero-makeup-video.mp4",
+    "mime": "video/mp4",
+    "bytes": 995614,
+    "referenced": true,
+    "external_id": ""
+  },
+  {
+    "uuid": "dd2f5ad6-13bc-4e2a-b587-84e1e21b7fff",
+    "file": "assets/eloria/script-dd2f5ad6.js",
+    "mime": "text/javascript",
+    "bytes": 61032,
+    "referenced": true,
+    "external_id": ""
+  },
+  {
+    "uuid": "6ec29b1d-57fd-46e9-aa8e-78cb1cee0876",
+    "file": "assets/eloria/font-6ec29b1d.woff2",
+    "mime": "font/woff2",
+    "bytes": 46308,
+    "referenced": true,
+    "external_id": ""
+  },
+  {
+    "uuid": "d82c3f8f-de89-4082-99f8-434214a72b11",
+    "file": "assets/eloria/font-d82c3f8f.woff2",
+    "mime": "font/woff2",
+    "bytes": 21860,
+    "referenced": true,
+    "external_id": ""
+  },
+  {
+    "uuid": "059850c3-cf63-455c-8265-c22410ccdb87",
+    "file": "assets/eloria/font-059850c3.woff2",
+    "mime": "font/woff2",
+    "bytes": 34524,
+    "referenced": true,
+    "external_id": ""
+  },
+  {
+    "uuid": "ba30c3bd-ee44-46cf-a861-2eec73681a1d",
+    "file": "assets/eloria/iransans-300.woff2",
+    "mime": "font/woff2",
+    "bytes": 32496,
+    "referenced": true,
+    "external_id": ""
+  },
+  {
+    "uuid": "ed401e72-4c0d-46ef-b584-8e5cbce7840f",
+    "file": "assets/eloria/iransans-400.woff2",
+    "mime": "font/woff2",
+    "bytes": 31256,
+    "referenced": true,
+    "external_id": ""
+  },
+  {
+    "uuid": "835f562f-8055-4f37-a887-3d25ea8806b6",
+    "file": "assets/eloria/iransans-500.woff2",
+    "mime": "font/woff2",
+    "bytes": 29260,
+    "referenced": true,
+    "external_id": ""
+  },
+  {
+    "uuid": "bea2db73-a9b1-4075-8d66-34a97ac4f0e0",
+    "file": "assets/eloria/iransans-700.woff2",
+    "mime": "font/woff2",
+    "bytes": 29256,
+    "referenced": true,
+    "external_id": ""
+  }
+]

@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Eloria | فروشگاه لوازم آرایشی</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --page: #f2ecfb;
+      --card: #ece2f5;
+      --primary: #7850cd;
+      --primary-2: #9a7ce6;
+      --primary-soft: #f1ecfa;
+      --plum: #5B3A5C;
+      --ink: #2b2038;
+      --muted: #75687f;
+      --line: rgba(120, 80, 205, .24);
+      --white: #ffffff;
+      --ease: cubic-bezier(.2, .7, .2, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      background: var(--page);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, Tahoma, sans-serif;
+      overflow-x: clip;
+    }
+
+    [hidden] { display: none !important; }
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    :focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
+
+    .design-scene {
+      min-height: 100vh;
+      background: var(--page);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .design-canvas {
+      position: relative;
+      width: min(100vw, 150vh);
+      aspect-ratio: 1200 / 800;
+      flex: 0 0 auto;
+    }
+
+    .design-frame {
+      position: absolute;
+      top: 26.25%;
+      left: 39.1667%;
+      width: 21.6667%;
+      height: 41.25%;
+      border: 3px solid var(--primary);
+      border-radius: 26px;
+      background: var(--card);
+      overflow: hidden;
+    }
+
+    .design-logo {
+      position: absolute;
+      top: 70%;
+      left: 0;
+      width: 100%;
+      color: var(--primary);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: min(6.5vw, 78px);
+      font-style: italic;
+      line-height: 1;
+      text-align: center;
+    }
+
+    .design-dot {
+      position: absolute;
+      top: 85.375%;
+      left: 50%;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--plum);
+      transform: translateX(-50%);
+    }
+
+    .auth-frame {
+      padding: 16px 18px 14px;
+      display: grid;
+      align-content: start;
+      gap: 9px;
+    }
+
+    .kicker {
+      color: var(--primary);
+      font-size: 11px;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.7;
+      letter-spacing: 0;
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      padding: 4px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, .46);
+    }
+
+    .tab {
+      height: 32px;
+      border: 0;
+      border-radius: 14px;
+      color: var(--muted);
+      background: transparent;
+      font-size: 12px;
+      font-weight: 700;
+      transition: background .25s ease, color .25s ease;
+    }
+
+    .tab.active {
+      color: #fff;
+      background: var(--primary);
+    }
+
+    .form {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field {
+      display: grid;
+      gap: 4px;
+    }
+
+    .field span {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .field input {
+      width: 100%;
+      height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: rgba(255, 255, 255, .58);
+      color: var(--ink);
+      padding: 0 12px;
+      text-align: right;
+      outline: none;
+      transition: border-color .25s ease, background .25s ease;
+    }
+
+    .field input:focus {
+      border-color: var(--primary);
+      background: rgba(255, 255, 255, .88);
+    }
+
+    .btn {
+      min-height: 38px;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 14px;
+      color: #fff;
+      background: var(--primary);
+      font-size: 12px;
+      font-weight: 800;
+      box-shadow: 0 12px 24px -16px rgba(120, 80, 205, .9);
+      transition: transform .25s ease, background .25s ease, color .25s ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn.ghost {
+      color: var(--primary);
+      border-color: var(--line);
+      background: rgba(255, 255, 255, .5);
+      box-shadow: none;
+    }
+
+    .message {
+      min-height: 18px;
+      color: var(--primary);
+      font-size: 11px;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .auth-actions {
+      display: grid;
+      gap: 7px;
+      margin-top: 2px;
+    }
+
+    .shop-nav {
+      position: fixed;
+      z-index: 20;
+      top: 18px;
+      right: 50%;
+      transform: translateX(50%);
+      width: min(680px, calc(100% - 40px));
+      min-height: 48px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, .56);
+      backdrop-filter: blur(12px);
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 12px;
+      padding: 6px 12px;
+    }
+
+    .shop-nav a,
+    .shop-nav button {
+      border: 0;
+      background: transparent;
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .nav-links,
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-actions { justify-content: flex-end; }
+
+    .nav-logo {
+      color: var(--primary);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 26px;
+      font-style: italic;
+      line-height: 1;
+    }
+
+    .hero-copy {
+      position: absolute;
+      right: 8%;
+      top: 36%;
+      width: 260px;
+    }
+
+    .hero-copy h1 {
+      color: var(--ink);
+      font-size: 30px;
+      line-height: 1.45;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .hero-copy p {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 2;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .hero-note {
+      position: absolute;
+      left: 9%;
+      top: 39%;
+      width: 220px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 2;
+    }
+
+    .product-symbol {
+      width: 100%;
+      height: 100%;
+    }
+
+    .shop-section {
+      padding: 90px clamp(20px, 4vw, 56px);
+      background: var(--page);
+    }
+
+    .wrap {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+    }
+
+    .section-intro {
+      max-width: 620px;
+      margin: 0 auto 36px;
+      text-align: center;
+    }
+
+    .section-intro span {
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .section-intro h2 {
+      margin-top: 8px;
+      color: var(--ink);
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1.35;
+    }
+
+    .section-intro p {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 2;
+    }
+
+    .category-grid,
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 18px;
+    }
+
+    .mini-frame {
+      min-height: 220px;
+      border: 3px solid var(--primary);
+      border-radius: 26px;
+      background: var(--card);
+      padding: 18px;
+      display: grid;
+      align-content: end;
+      gap: 8px;
+      color: var(--ink);
+      transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+    }
+
+    .mini-frame:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 56px -32px rgba(60, 30, 90, .45);
+    }
+
+    .mini-frame small {
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 11px;
+    }
+
+    .mini-frame h3 {
+      font-size: 22px;
+      line-height: 1.45;
+    }
+
+    .mini-frame p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .product-card {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, .58);
+      padding: 14px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .product-art {
+      aspect-ratio: 1 / 1;
+      border: 3px solid var(--primary);
+      border-radius: 26px;
+      background: var(--card);
+      display: grid;
+      place-items: center;
+    }
+
+    .product-card small {
+      color: var(--primary);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .product-card h3 {
+      min-height: 54px;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .footer {
+      padding: 54px clamp(20px, 4vw, 56px) 70px;
+      text-align: center;
+      color: var(--primary);
+      background: var(--page);
+    }
+
+    .footer .brand {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 54px;
+      font-style: italic;
+      line-height: 1;
+    }
+
+    .footer .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin: 24px auto 0;
+      background: var(--plum);
+    }
+
+    @media (max-width: 760px) {
+      body { overflow-x: hidden; }
+
+      .design-scene { min-height: auto; overflow: visible; }
+
+      .design-canvas {
+        width: 100vw;
+        min-height: 760px;
+        aspect-ratio: auto;
+      }
+
+      .design-frame {
+        top: 112px;
+        left: 50%;
+        width: min(260px, calc(100vw - 40px));
+        height: 330px;
+        transform: translateX(-50%);
+      }
+
+      .design-logo {
+        top: 470px;
+        font-size: 64px;
+      }
+
+      .design-dot { top: 600px; }
+
+      .shop-nav {
+        top: 12px;
+        grid-template-columns: 1fr auto;
+      }
+
+      .nav-links { display: none; }
+
+      .hero-copy,
+      .hero-note {
+        position: static;
+        width: auto;
+        max-width: 320px;
+        margin: 0 auto;
+        padding: 0 20px;
+        text-align: center;
+      }
+
+      .hero-copy { padding-top: 650px; }
+      .hero-actions { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <main id="authScreen" class="design-scene" data-screen-label="login">
+    <section class="design-canvas" aria-label="ورود به الوریا">
+      <div class="design-frame auth-frame" id="authCard">
+        <div class="kicker">فروشگاه لوازم آرایشی الوریا</div>
+        <div class="tabs" role="tablist" aria-label="ورود یا ثبت نام">
+          <button class="tab active" type="button" data-mode="login">ورود</button>
+          <button class="tab" type="button" data-mode="register">ثبت نام</button>
+        </div>
+        <form class="form" id="authForm">
+          <label class="field" id="nameField" hidden>
+            <span>نام</span>
+            <input name="name" autocomplete="name">
+          </label>
+          <label class="field">
+            <span>ایمیل</span>
+            <input name="email" type="email" dir="ltr" autocomplete="email" required>
+          </label>
+          <label class="field">
+            <span>رمز عبور</span>
+            <input name="password" type="password" autocomplete="current-password" minlength="6" required>
+          </label>
+          <div class="auth-actions">
+            <button class="btn" id="submitButton" type="submit">ورود به فروشگاه</button>
+            <button class="btn ghost" id="demoButton" type="button">ورود نمونه</button>
+          </div>
+          <div class="message" id="message" aria-live="polite"></div>
+        </form>
+      </div>
+      <div class="design-logo">Eloria</div>
+      <div class="design-dot" aria-hidden="true"></div>
+    </section>
+  </main>
+
+  <main id="shopScreen" hidden>
+    <nav class="shop-nav" aria-label="ناوبری فروشگاه">
+      <div class="nav-links">
+        <a href="#categories">دسته ها</a>
+        <a href="#products">محصولات</a>
+        <a href="#phases">فازها</a>
+      </div>
+      <a class="nav-logo" href="#hero">Eloria</a>
+      <div class="nav-actions">
+        <button type="button" id="logoutButton">خروج</button>
+      </div>
+    </nav>
+
+    <section id="hero" class="design-scene" data-screen-label="landing">
+      <div class="design-canvas">
+        <div class="hero-copy">
+          <h1>فروشگاه آرام برای زیبایی روزانه</h1>
+          <p>ساختار از فازهای Docs می آید و فرم بصری از Design: قاب مرکزی، رنگ یاسی و حرکت کم.</p>
+          <div class="hero-actions">
+            <a class="btn" href="#categories">شروع کشف</a>
+            <a class="btn ghost" href="#products">محصولات</a>
+          </div>
+        </div>
+
+        <div class="design-frame" aria-label="نمای مینیمال محصولات آرایشی">
+          <svg class="product-symbol" viewBox="0 0 260 330" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="67" y="84" width="48" height="166" rx="18" fill="rgba(255,255,255,.42)" stroke="#7850cd" stroke-width="3"></rect>
+            <rect x="136" y="122" width="42" height="128" rx="18" fill="rgba(255,255,255,.42)" stroke="#7850cd" stroke-width="3"></rect>
+            <path d="M91 84V61M79 61h24" stroke="#7850cd" stroke-width="3" stroke-linecap="round"></path>
+            <path d="M157 122V92M147 92h20" stroke="#7850cd" stroke-width="3" stroke-linecap="round"></path>
+            <circle cx="130" cy="272" r="8" fill="#5B3A5C"></circle>
+          </svg>
+        </div>
+
+        <p class="hero-note">ورود، حساب، فروشگاه، محصول و چک اوت به ترتیب فازبندی شده اند؛ این صفحه نمونه بصری فاز ورود و لندینگ است.</p>
+        <div class="design-logo">Eloria</div>
+        <div class="design-dot" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <section id="categories" class="shop-section" data-screen-label="categories">
+      <div class="wrap">
+        <div class="section-intro">
+          <span>دسته بندی</span>
+          <h2>همه چیز داخل همان زبان قاب دار</h2>
+          <p>به جای کارت های شلوغ، هر دسته مثل نسخه کوچک قاب اصلی طراحی شده است.</p>
+        </div>
+        <div class="category-grid">
+          <a class="mini-frame" href="#products"><small>MAKEUP</small><h3>آرایش صورت</h3><p>بیس، رژگونه، لب و چشم.</p></a>
+          <a class="mini-frame" href="#products"><small>SKINCARE</small><h3>مراقبت پوست</h3><p>سرم، کرم و آماده سازی پوست.</p></a>
+          <a class="mini-frame" href="#products"><small>FRAGRANCE</small><h3>عطر و رایحه</h3><p>رایحه های روزانه و مینیمال.</p></a>
+          <a class="mini-frame" href="#products"><small>TOOLS</small><h3>ابزار زیبایی</h3><p>براش، پد و ابزار تکمیل روتین.</p></a>
+        </div>
+      </div>
+    </section>
+
+    <section id="products" class="shop-section" data-screen-label="products">
+      <div class="wrap">
+        <div class="section-intro">
+          <span>محصولات منتخب</span>
+          <h2>نمونه کاتالوگ بدون خروج از Design</h2>
+          <p>فعلا از تصویر واقعی استفاده نشده تا سبک مرجع حفظ شود. در فاز asset، با imagegen یا فایل واقعی محصول تکمیل می شود.</p>
+        </div>
+        <div class="product-grid" id="productGrid"></div>
+      </div>
+    </section>
+
+    <section id="phases" class="shop-section" data-screen-label="phases">
+      <div class="wrap">
+        <div class="section-intro">
+          <span>فازبندی</span>
+          <h2>مسیر ساخت فروشگاه</h2>
+          <p>مطابق Docs: ورود و حساب، بعد landing، بعد کاتالوگ، سبد، چک اوت و در نهایت Nuxt/MySQL.</p>
+        </div>
+        <div class="category-grid">
+          <div class="mini-frame"><small>01</small><h3>Login</h3><p>ورود، ثبت نام و حساب کاربری.</p></div>
+          <div class="mini-frame"><small>02</small><h3>Landing</h3><p>هرو و دسته بندی شبیه همین طراحی.</p></div>
+          <div class="mini-frame"><small>03</small><h3>Commerce</h3><p>محصول، سبد و چک اوت.</p></div>
+          <div class="mini-frame"><small>04</small><h3>Backend</h3><p>Nuxt، MySQL، Auth امن و API.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="brand">Eloria</div>
+      <div class="dot"></div>
+    </footer>
+  </main>
+
+  <script>
+    const products = [
+      { brand: "ELORIA EDIT", name: "رژ لب ساتن روزانه", price: "۴۸۵٬۰۰۰ تومان" },
+      { brand: "SKIN ATELIER", name: "سرم آبرسان سبک", price: "۶۹۰٬۰۰۰ تومان" },
+      { brand: "SOFT HALO", name: "رژگونه کرمی طبیعی", price: "۴۳۰٬۰۰۰ تومان" },
+      { brand: "ELORIA TOOLS", name: "براش چندکاره صورت", price: "۳۶۰٬۰۰۰ تومان" }
+    ];
+
+    const authScreen = document.getElementById("authScreen");
+    const shopScreen = document.getElementById("shopScreen");
+    const authForm = document.getElementById("authForm");
+    const message = document.getElementById("message");
+    const nameField = document.getElementById("nameField");
+    const submitButton = document.getElementById("submitButton");
+    let mode = "login";
+
+    function setMode(nextMode) {
+      mode = nextMode;
+      document.querySelectorAll(".tab").forEach((tab) => tab.classList.toggle("active", tab.dataset.mode === mode));
+      nameField.hidden = mode === "login";
+      submitButton.textContent = mode === "login" ? "ورود به فروشگاه" : "ساخت حساب";
+      message.textContent = "";
+    }
+
+    function renderProducts() {
+      document.getElementById("productGrid").innerHTML = products.map((product) => `
+        <article class="product-card">
+          <div class="product-art">
+            <svg viewBox="0 0 160 160" width="92" height="92" aria-hidden="true">
+              <rect x="46" y="34" width="34" height="92" rx="14" fill="#ece2f5" stroke="#7850cd" stroke-width="4"></rect>
+              <rect x="88" y="58" width="28" height="68" rx="13" fill="#ece2f5" stroke="#7850cd" stroke-width="4"></rect>
+              <circle cx="80" cy="136" r="5" fill="#5B3A5C"></circle>
+            </svg>
+          </div>
+          <small>${product.brand}</small>
+          <h3>${product.name}</h3>
+          <div class="price-row"><span>${product.price}</span><button class="btn" type="button">افزودن</button></div>
+        </article>
+      `).join("");
+    }
+
+    function showShop() {
+      authScreen.hidden = true;
+      shopScreen.hidden = false;
+      renderProducts();
+      window.scrollTo(0, 0);
+    }
+
+    function showAuth() {
+      shopScreen.hidden = true;
+      authScreen.hidden = false;
+      window.scrollTo(0, 0);
+    }
+
+    document.querySelectorAll(".tab").forEach((tab) => tab.addEventListener("click", () => setMode(tab.dataset.mode)));
+
+    document.getElementById("demoButton").addEventListener("click", () => {
+      localStorage.setItem("eloria_user", JSON.stringify({ name: "کاربر الوریا", email: "demo@eloria.local" }));
+      showShop();
+    });
+
+    document.getElementById("logoutButton").addEventListener("click", () => {
+      localStorage.removeItem("eloria_user");
+      showAuth();
+    });
+
+    authForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const data = new FormData(authForm);
+      const email = String(data.get("email") || "").trim();
+      const password = String(data.get("password") || "");
+      const name = String(data.get("name") || "").trim() || "کاربر الوریا";
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        message.textContent = "ایمیل معتبر نیست.";
+        return;
+      }
+
+      if (password.length < 6) {
+        message.textContent = "رمز عبور حداقل ۶ کاراکتر باشد.";
+        return;
+      }
+
+      localStorage.setItem("eloria_user", JSON.stringify({ name, email }));
+      showShop();
+    });
+
+    if (location.hash === "#shop-preview") {
+      showShop();
+    } else {
+      showAuth();
+    }
+  </script>
+</body>
+</html>
