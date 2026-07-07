@@ -354,6 +354,66 @@
       padding:0 18px;
       color:var(--ink);
     }
+    .el-latest{
+      margin:0 0 clamp(28px,4vw,46px);
+    }
+    .el-latest-head{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:16px;
+    }
+    .el-latest-head h3{
+      margin:0;
+      color:var(--ink);
+      font-size:clamp(23px,2.4vw,34px);
+      line-height:1.4;
+    }
+    .el-latest-head span{
+      display:block;
+      color:var(--primary);
+      font-size:12px;
+      font-weight:800;
+      margin-bottom:4px;
+    }
+    .el-latest-track{
+      display:grid;
+      grid-auto-flow:column;
+      grid-auto-columns:clamp(240px,28vw,360px);
+      gap:18px;
+      overflow-x:auto;
+      overscroll-behavior-inline:contain;
+      scroll-snap-type:inline mandatory;
+      scrollbar-width:thin;
+      scrollbar-color:var(--primary) rgba(255,255,255,.62);
+      padding:2px 0 14px;
+    }
+    .el-latest-track::-webkit-scrollbar{height:8px;}
+    .el-latest-track::-webkit-scrollbar-track{background:rgba(255,255,255,.62);border-radius:999px;}
+    .el-latest-track::-webkit-scrollbar-thumb{background:var(--primary);border-radius:999px;}
+    .el-latest-card{
+      scroll-snap-align:start;
+      min-width:0;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:#fff;
+      overflow:hidden;
+      box-shadow:0 24px 62px -48px rgba(60,30,90,.48);
+      transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s ease;
+    }
+    .el-latest-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-card);border-color:rgba(120,80,205,.28);}
+    .el-latest-card img{
+      width:100%;
+      aspect-ratio:4/5;
+      object-fit:cover;
+      background:var(--surface);
+      transition:transform .7s var(--ease);
+    }
+    .el-latest-card:hover img{transform:scale(1.06);}
+    .el-latest-info{padding:14px 16px 16px;}
+    .el-latest-info b{display:block;color:var(--ink);font-size:15px;line-height:1.7;}
+    .el-latest-info span{display:block;margin-top:4px;color:var(--primary);font-size:12px;font-weight:800;}
     .el-products{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;}
     .el-card{
       background:#fff;
@@ -580,6 +640,8 @@
       .el-modal-media{display:none;}
       .el-toolbar{align-items:stretch;}
       .el-search{width:100%;}
+      .el-latest-head{align-items:flex-start;}
+      .el-latest-track{grid-auto-columns:min(78vw,320px);}
     }
     @media (prefers-reduced-motion:reduce){
       *,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.001ms!important;}
@@ -696,6 +758,32 @@
             <h2 class="el-title">انتخاب‌های امروز ELORIA</h2>
             <p class="el-lead">محصولات منتخب با تصویر واضح، امتیاز خریداران، سواچ رنگ و افزودن سریع به سبد.</p>
           </div>
+          <section class="el-latest el-reveal" id="latest-products" aria-labelledby="latestTitle">
+            <div class="el-latest-head">
+              <div>
+                <span>تازه‌ها</span>
+                <h3 id="latestTitle">جدیدترین محصولات</h3>
+              </div>
+            </div>
+            <div class="el-latest-track" tabindex="0">
+              <a class="el-latest-card" href="#products" data-filter-link="face">
+                <img src="assets/eloria/product-1.webp" alt="پودر فیکس کننده مات" loading="lazy">
+                <div class="el-latest-info"><b>پودر فیکس کننده مات</b><span>SHEGLAM</span></div>
+              </a>
+              <a class="el-latest-card" href="#products" data-filter-link="lip">
+                <img src="assets/eloria/product-2.webp" alt="رژگونه و رژ لب کوشن" loading="lazy">
+                <div class="el-latest-info"><b>رژگونه و رژ لب کوشن</b><span>SHEGLAM</span></div>
+              </a>
+              <a class="el-latest-card" href="#products" data-filter-link="skin">
+                <img src="assets/eloria/product-3.webp" alt="سرم آبرسان نیاسیناماید" loading="lazy">
+                <div class="el-latest-info"><b>سرم آبرسان نیاسیناماید</b><span>SHEGLAM</span></div>
+              </a>
+              <a class="el-latest-card" href="#products" data-filter-link="eye">
+                <img src="assets/eloria/product-4.webp" alt="پالت سایه Love N Taupe" loading="lazy">
+                <div class="el-latest-info"><b>پالت سایه Love N Taupe</b><span>SHEGLAM</span></div>
+              </a>
+            </div>
+          </section>
           <div class="el-toolbar">
             <div class="el-chips" role="list" aria-label="فیلتر محصولات">
               <button class="el-chip is-active" type="button" data-filter="all">همه</button>
