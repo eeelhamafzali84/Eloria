@@ -377,6 +377,7 @@
       font-weight:800;
       margin-bottom:4px;
     }
+    .el-latest-window{position:relative;}
     .el-latest-track{
       display:grid;
       grid-auto-flow:column;
@@ -385,13 +386,31 @@
       overflow-x:auto;
       overscroll-behavior-inline:contain;
       scroll-snap-type:inline mandatory;
-      scrollbar-width:thin;
-      scrollbar-color:var(--primary) rgba(255,255,255,.62);
-      padding:2px 0 14px;
+      scrollbar-width:none;
+      -ms-overflow-style:none;
+      padding:2px 54px 8px;
     }
-    .el-latest-track::-webkit-scrollbar{height:8px;}
-    .el-latest-track::-webkit-scrollbar-track{background:rgba(255,255,255,.62);border-radius:999px;}
-    .el-latest-track::-webkit-scrollbar-thumb{background:var(--primary);border-radius:999px;}
+    .el-latest-track::-webkit-scrollbar{display:none;}
+    .el-latest-scroll{
+      position:absolute;
+      top:50%;
+      z-index:5;
+      width:42px;
+      height:42px;
+      border:1px solid rgba(120,80,205,.24);
+      border-radius:50%;
+      background:rgba(255,255,255,.88);
+      color:var(--primary);
+      display:grid;
+      place-items:center;
+      box-shadow:0 18px 40px -26px rgba(60,30,90,.55);
+      transform:translateY(-50%);
+      transition:transform .25s var(--ease),background .25s ease,color .25s ease,border-color .25s ease;
+    }
+    .el-latest-scroll:hover{background:var(--primary);color:#fff;border-color:var(--primary);transform:translateY(-50%) scale(1.04);}
+    .el-latest-scroll svg{width:21px;height:21px;display:block;}
+    .el-latest-scroll-prev{right:2px;}
+    .el-latest-scroll-next{left:2px;}
     .el-latest-card{
       scroll-snap-align:start;
       min-width:0;
@@ -417,6 +436,7 @@
     .el-latest-info{margin-top:6px;padding:14px 16px 16px;background:#fff;border-radius:calc(var(--radius) - 8px);}
     .el-latest-info b{display:block;color:var(--ink);font-size:15px;line-height:1.7;}
     .el-latest-info span{display:block;margin-top:4px;color:var(--primary);font-size:12px;font-weight:800;}
+    .el-latest-add{width:100%;margin-top:14px;}
     .el-products{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;}
     .el-card{
       background:var(--surface);
@@ -645,7 +665,8 @@
       .el-toolbar{align-items:stretch;}
       .el-search{width:100%;}
       .el-latest-head{align-items:flex-start;}
-      .el-latest-track{grid-auto-columns:min(78vw,320px);}
+      .el-latest-track{grid-auto-columns:min(78vw,320px);padding-inline:48px;}
+      .el-latest-scroll{width:38px;height:38px;}
     }
     @media (prefers-reduced-motion:reduce){
       *,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.001ms!important;}
@@ -769,23 +790,31 @@
                 <h3 id="latestTitle">جدیدترین محصولات</h3>
               </div>
             </div>
-            <div class="el-latest-track" tabindex="0">
-              <a class="el-latest-card" href="#products" data-filter-link="face">
-                <img src="assets/eloria/product-1.webp" alt="پودر فیکس کننده مات" loading="lazy">
-                <div class="el-latest-info"><b>پودر فیکس کننده مات</b><span>SHEGLAM</span></div>
-              </a>
-              <a class="el-latest-card" href="#products" data-filter-link="lip">
-                <img src="assets/eloria/product-2.webp" alt="رژگونه و رژ لب کوشن" loading="lazy">
-                <div class="el-latest-info"><b>رژگونه و رژ لب کوشن</b><span>SHEGLAM</span></div>
-              </a>
-              <a class="el-latest-card" href="#products" data-filter-link="skin">
-                <img src="assets/eloria/product-3.webp" alt="سرم آبرسان نیاسیناماید" loading="lazy">
-                <div class="el-latest-info"><b>سرم آبرسان نیاسیناماید</b><span>SHEGLAM</span></div>
-              </a>
-              <a class="el-latest-card" href="#products" data-filter-link="eye">
-                <img src="assets/eloria/product-4.webp" alt="پالت سایه Love N Taupe" loading="lazy">
-                <div class="el-latest-info"><b>پالت سایه Love N Taupe</b><span>SHEGLAM</span></div>
-              </a>
+            <div class="el-latest-window">
+              <button class="el-latest-scroll el-latest-scroll-prev" type="button" data-latest-scroll="prev" aria-label="محصولات قبلی">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+              </button>
+              <div class="el-latest-track" id="latestTrack" tabindex="0">
+                <article class="el-latest-card">
+                  <img src="assets/eloria/product-1.webp" alt="پودر فیکس کننده مات" loading="lazy">
+                  <div class="el-latest-info"><b>پودر فیکس کننده مات</b><span>SHEGLAM</span><button class="el-add el-latest-add" type="button" data-add="p1">افزودن به سبد خرید</button></div>
+                </article>
+                <article class="el-latest-card">
+                  <img src="assets/eloria/product-2.webp" alt="رژگونه و رژ لب کوشن" loading="lazy">
+                  <div class="el-latest-info"><b>رژگونه و رژ لب کوشن</b><span>SHEGLAM</span><button class="el-add el-latest-add" type="button" data-add="p2">افزودن به سبد خرید</button></div>
+                </article>
+                <article class="el-latest-card">
+                  <img src="assets/eloria/product-3.webp" alt="سرم آبرسان نیاسیناماید" loading="lazy">
+                  <div class="el-latest-info"><b>سرم آبرسان نیاسیناماید</b><span>SHEGLAM</span><button class="el-add el-latest-add" type="button" data-add="p3">افزودن به سبد خرید</button></div>
+                </article>
+                <article class="el-latest-card">
+                  <img src="assets/eloria/product-4.webp" alt="پالت سایه Love N Taupe" loading="lazy">
+                  <div class="el-latest-info"><b>پالت سایه Love N Taupe</b><span>SHEGLAM</span><button class="el-add el-latest-add" type="button" data-add="p4">افزودن به سبد خرید</button></div>
+                </article>
+              </div>
+              <button class="el-latest-scroll el-latest-scroll-next" type="button" data-latest-scroll="next" aria-label="محصولات بعدی">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>
+              </button>
             </div>
           </section>
           <div class="el-toolbar">
@@ -1177,6 +1206,14 @@
         if(action === "open-auth"){ event.preventDefault(); openAuth(); }
         if(action === "close-auth") closeAuth();
         if(action === "focus-search"){ document.getElementById("products").scrollIntoView({behavior:"smooth"}); setTimeout(() => els.searchInput.focus(), 420); }
+      }
+      const latestScroll = event.target.closest("[data-latest-scroll]");
+      if(latestScroll){
+        const track = document.getElementById("latestTrack");
+        if(track){
+          const amount = Math.max(220, track.clientWidth * .78);
+          track.scrollBy({left: latestScroll.dataset.latestScroll === "next" ? -amount : amount, behavior:"smooth"});
+        }
       }
       const addTarget = event.target.closest("[data-add]");
       if(addTarget) addToCart(addTarget.dataset.add);
