@@ -542,7 +542,7 @@
     .el-ba-line{position:absolute;top:0;bottom:0;left:50%;width:2px;background:#fff;box-shadow:0 0 20px rgba(0,0,0,.3);pointer-events:none;z-index:3;}
     .el-ba-handle{position:absolute;top:50%;left:50%;width:44px;height:44px;border-radius:50%;background:#fff;color:var(--primary);display:grid;place-items:center;transform:translate(-50%,-50%);box-shadow:0 8px 24px rgba(0,0,0,.24);}
     .el-ba-handle svg{width:20px;height:20px;display:block;}
-    .el-ba-range{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;z-index:4;touch-action:none;}
+    .el-ba-drag{position:absolute;inset:0;cursor:ew-resize;z-index:4;touch-action:none;}
     .el-proof{display:grid;gap:14px;margin-top:24px;}
     .el-proof-item{padding:16px 18px;border:1px solid var(--line);border-radius:var(--radius);background:#fff;display:flex;align-items:flex-start;gap:12px;}
     .el-proof-item svg{color:var(--success);flex:0 0 auto;margin-top:3px;}
@@ -1013,7 +1013,7 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 7-4 5 4 5"></path><path d="m16 7 4 5-4 5"></path></svg>
               </span>
             </span>
-            <input class="el-ba-range" id="baRange" type="range" min="0" max="100" value="50" aria-label="مقایسه قبل و بعد">
+            <div class="el-ba-drag" id="baDrag" role="slider" tabindex="0" aria-label="مقایسه قبل و بعد" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"></div>
           </div>
           <div class="el-reveal">
             <span class="el-eyebrow">روتین پیشنهادی</span>
@@ -1158,7 +1158,7 @@
       accountText: document.getElementById("accountText"),
       baAfter: document.getElementById("baAfter"),
       baLine: document.getElementById("baLine"),
-      baRange: document.getElementById("baRange"),
+      baDrag: document.getElementById("baDrag"),
       toast: document.getElementById("toast")
     };
 
@@ -1407,10 +1407,53 @@
     });
     document.querySelectorAll("[data-auth-tab]").forEach(btn => btn.addEventListener("click", () => setAuthMode(btn.dataset.authTab)));
     els.searchInput.addEventListener("input", renderProducts);
-    els.baRange.addEventListener("input", event => {
-      const value = event.target.value;
-      els.baAfter.style.clipPath = `inset(0 0 0 ${value}%)`;
-      els.baLine.style.left = `${value}%`;
+    function setBeforeAfter(value){
+      const next = Math.max(0, Math.min(100, value));
+      els.baAfter.style.clipPath = `inset(0 0 0 ${next}%)`;
+      els.baLine.style.left = `${next}%`;
+      els.baDrag.setAttribute("aria-valuenow", String(Math.round(next)));
+    }
+
+    function updateBeforeAfterFromPointer(event){
+      const rect = els.baDrag.getBoundingClientRect();
+      const value = ((event.clientX - rect.left) / rect.width) * 100;
+      setBeforeAfter(value);
+    }
+
+    let baDragging = false;
+    els.baDrag.addEventListener("pointerdown", event => {
+      baDragging = true;
+      els.baDrag.setPointerCapture(event.pointerId);
+      updateBeforeAfterFromPointer(event);
+    });
+    els.baDrag.addEventListener("pointermove", event => {
+      if(baDragging) updateBeforeAfterFromPointer(event);
+    });
+    els.baDrag.addEventListener("pointerup", event => {
+      baDragging = false;
+      els.baDrag.releasePointerCapture(event.pointerId);
+    });
+    els.baDrag.addEventListener("pointercancel", () => {
+      baDragging = false;
+    });
+    els.baDrag.addEventListener("keydown", event => {
+      const current = Number(els.baDrag.getAttribute("aria-valuenow")) || 50;
+      if(event.key === "ArrowLeft" || event.key === "ArrowDown"){
+        event.preventDefault();
+        setBeforeAfter(current - 4);
+      }
+      if(event.key === "ArrowRight" || event.key === "ArrowUp"){
+        event.preventDefault();
+        setBeforeAfter(current + 4);
+      }
+      if(event.key === "Home"){
+        event.preventDefault();
+        setBeforeAfter(0);
+      }
+      if(event.key === "End"){
+        event.preventDefault();
+        setBeforeAfter(100);
+      }
     });
     els.authForm.addEventListener("submit", event => {
       event.preventDefault();
