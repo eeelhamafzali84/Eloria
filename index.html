@@ -442,10 +442,13 @@
       transition:transform .7s var(--ease);
     }
     .el-latest-card:hover .el-latest-thumb img{transform:scale(1.06);}
-    .el-latest-info{margin-top:6px;padding:14px 16px 16px;background:#fff;border-radius:calc(var(--radius) - 8px);}
+    .el-latest-info{margin-top:6px;padding:14px 16px 16px;background:#fff;border-radius:calc(var(--radius) - 8px);display:grid;gap:10px;}
     .el-latest-info b{display:block;color:var(--ink);font-size:15px;line-height:1.7;}
-    .el-latest-info span{display:block;margin-top:4px;color:var(--primary);font-size:12px;font-weight:800;}
-    .el-latest-add{margin-top:12px;}
+    .el-latest-brand{display:block;color:var(--primary);font-size:12px;font-weight:800;}
+    .el-latest-info .el-rating{margin-top:0;}
+    .el-latest-info .el-swatches{margin-top:0;}
+    .el-latest-info .el-swatch{width:17px;height:17px;}
+    .el-latest-add{margin-top:4px;}
     .el-partners{
       width:100vw;
       margin:0 calc(50% - 50vw) clamp(30px,4vw,50px);
@@ -869,28 +872,68 @@
                     <img src="assets/eloria/product-1.webp" alt="پودر فیکس کننده مات" loading="lazy">
                     <button class="el-wish" type="button" data-favorite="p1" aria-label="افزودن پودر فیکس کننده مات به علاقه‌مندی‌ها"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z"></path></svg></button>
                   </div>
-                  <div class="el-latest-info"><b>پودر فیکس کننده مات</b><span>SHEGLAM</span><button class="el-add el-latest-add" type="button" data-add="p1">افزودن به سبد خرید</button></div>
+                  <div class="el-latest-info">
+                    <b>پودر فیکس کننده مات</b>
+                    <span class="el-latest-brand">SHEGLAM</span>
+                    <div class="el-rating"><span class="el-stars">★★★★★</span><span>۴.۹ · ۲۱۴۰ نظر</span></div>
+                    <div class="el-swatches" aria-label="رنگ‌های پودر فیکس کننده مات">
+                      <span class="el-swatch" style="--swatch:#e9c3a3"></span>
+                      <span class="el-swatch" style="--swatch:#d8a984"></span>
+                      <span class="el-swatch" style="--swatch:#b5825f"></span>
+                    </div>
+                    <button class="el-add el-latest-add" type="button" data-add="p1">افزودن به سبد خرید</button>
+                  </div>
                 </article>
                 <article class="el-latest-card">
                   <div class="el-latest-thumb">
                     <img src="assets/eloria/product-2.webp" alt="رژگونه و رژ لب کوشن" loading="lazy">
                     <button class="el-wish" type="button" data-favorite="p2" aria-label="افزودن رژگونه و رژ لب کوشن به علاقه‌مندی‌ها"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z"></path></svg></button>
                   </div>
-                  <div class="el-latest-info"><b>رژگونه و رژ لب کوشن</b><span>SHEGLAM</span><button class="el-add el-latest-add" type="button" data-add="p2">افزودن به سبد خرید</button></div>
+                  <div class="el-latest-info">
+                    <b>رژگونه و رژ لب کوشن</b>
+                    <span class="el-latest-brand">SHEGLAM</span>
+                    <div class="el-rating"><span class="el-stars">★★★★★</span><span>۴.۸ · ۱۸۷۶ نظر</span></div>
+                    <div class="el-swatches" aria-label="رنگ‌های رژگونه و رژ لب کوشن">
+                      <span class="el-swatch" style="--swatch:#b23a5b"></span>
+                      <span class="el-swatch" style="--swatch:#8f2d4a"></span>
+                      <span class="el-swatch" style="--swatch:#d6647f"></span>
+                    </div>
+                    <button class="el-add el-latest-add" type="button" data-add="p2">افزودن به سبد خرید</button>
+                  </div>
                 </article>
                 <article class="el-latest-card">
                   <div class="el-latest-thumb">
                     <img src="assets/eloria/product-3.webp" alt="سرم آبرسان نیاسیناماید" loading="lazy">
                     <button class="el-wish" type="button" data-favorite="p3" aria-label="افزودن سرم آبرسان نیاسیناماید به علاقه‌مندی‌ها"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z"></path></svg></button>
                   </div>
-                  <div class="el-latest-info"><b>سرم آبرسان نیاسیناماید</b><span>SHEGLAM</span><button class="el-add el-latest-add" type="button" data-add="p3">افزودن به سبد خرید</button></div>
+                  <div class="el-latest-info">
+                    <b>سرم آبرسان نیاسیناماید</b>
+                    <span class="el-latest-brand">SHEGLAM</span>
+                    <div class="el-rating"><span class="el-stars">★★★★★</span><span>۴.۹ · ۹۸۰ نظر</span></div>
+                    <div class="el-swatches" aria-label="رنگ‌های سرم آبرسان نیاسیناماید">
+                      <span class="el-swatch" style="--swatch:#c9a7e6"></span>
+                      <span class="el-swatch" style="--swatch:#f1ecfa"></span>
+                      <span class="el-swatch" style="--swatch:#bca5df"></span>
+                    </div>
+                    <button class="el-add el-latest-add" type="button" data-add="p3">افزودن به سبد خرید</button>
+                  </div>
                 </article>
                 <article class="el-latest-card">
                   <div class="el-latest-thumb">
                     <img src="assets/eloria/product-4.webp" alt="پالت سایه Love N Taupe" loading="lazy">
                     <button class="el-wish" type="button" data-favorite="p4" aria-label="افزودن پالت سایه Love N Taupe به علاقه‌مندی‌ها"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z"></path></svg></button>
                   </div>
-                  <div class="el-latest-info"><b>پالت سایه Love N Taupe</b><span>SHEGLAM</span><button class="el-add el-latest-add" type="button" data-add="p4">افزودن به سبد خرید</button></div>
+                  <div class="el-latest-info">
+                    <b>پالت سایه Love N Taupe</b>
+                    <span class="el-latest-brand">SHEGLAM</span>
+                    <div class="el-rating"><span class="el-stars">★★★★★</span><span>۴.۷ · ۱۳۲۰ نظر</span></div>
+                    <div class="el-swatches" aria-label="رنگ‌های پالت سایه Love N Taupe">
+                      <span class="el-swatch" style="--swatch:#caa06f"></span>
+                      <span class="el-swatch" style="--swatch:#a5764c"></span>
+                      <span class="el-swatch" style="--swatch:#7b5535"></span>
+                    </div>
+                    <button class="el-add el-latest-add" type="button" data-add="p4">افزودن به سبد خرید</button>
+                  </div>
                 </article>
               </div>
               <button class="el-latest-scroll el-latest-scroll-next" type="button" data-latest-scroll="next" aria-label="محصولات بعدی">
@@ -928,8 +971,8 @@
       <section class="el-section" id="reviews" data-screen-label="Reviews">
         <div class="el-container">
           <div class="el-intro el-reveal">
-            <span class="el-eyebrow">نظرات مشتریان</span>
-            <h2 class="el-title">تجربه‌ی مشتریان از الوریا</h2>
+            <span class="el-eyebrow">تجربه مشتریان از الوریا</span>
+            <h2 class="el-title">نظرات مشتریان</h2>
           </div>
           <div class="el-reviews">
             <article class="el-review el-reveal">
