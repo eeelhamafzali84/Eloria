@@ -64,6 +64,10 @@
       0%,100%{opacity:.84;transform:scale(1);filter:drop-shadow(0 0 0 rgba(91,58,92,0));}
       50%{opacity:.92;transform:scale(1.025);filter:drop-shadow(0 4px 10px rgba(91,58,92,.14));}
     }
+    @keyframes el-marquee{
+      from{transform:translateX(0);}
+      to{transform:translateX(-50%);}
+    }
 
     .el-app{min-height:100vh;background:var(--page);overflow:hidden;max-width:100vw;}
     .el-container{width:min(1360px,100%);margin:0 auto;padding-inline:var(--gutter);}
@@ -443,68 +447,46 @@
     .el-latest-info span{display:block;margin-top:4px;color:var(--primary);font-size:12px;font-weight:800;}
     .el-latest-add{margin-top:12px;}
     .el-partners{
-      margin:0 0 clamp(30px,4vw,50px);
-      padding:clamp(20px,3vw,30px);
-      border:1px solid rgba(120,80,205,.16);
-      border-radius:calc(var(--radius) + 6px);
-      background:rgba(255,255,255,.58);
-      box-shadow:0 24px 70px -56px rgba(60,30,90,.45);
+      width:100vw;
+      margin:0 calc(50% - 50vw) clamp(30px,4vw,50px);
+      padding:clamp(70px,8vw,120px) 0;
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+      background:#f2ecfb;
+      overflow:hidden;
     }
     .el-partners-head{
-      display:flex;
-      align-items:end;
-      justify-content:space-between;
-      gap:16px;
-      margin-bottom:18px;
+      text-align:center;
+      margin:0 0 48px;
+      padding-inline:var(--gutter);
     }
-    .el-partners-head span{
-      display:block;
-      color:var(--primary);
-      font-size:12px;
-      font-weight:800;
-      margin-bottom:4px;
-    }
+    .el-partners-head span{display:none;}
     .el-partners-head h3{
       margin:0;
-      color:var(--ink);
-      font-size:clamp(22px,2.2vw,32px);
-      line-height:1.45;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.8;
+      font-weight:500;
     }
-    .el-partner-grid{
-      display:grid;
-      grid-template-columns:repeat(4,minmax(0,1fr));
-      gap:12px;
-    }
-    .el-partner-card{
-      min-height:86px;
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      background:#fff;
+    .el-partner-track{
       display:flex;
       align-items:center;
-      gap:12px;
-      padding:14px;
+      gap:clamp(48px,6vw,96px);
+      width:max-content;
+      animation:el-marquee 32s linear infinite;
+      will-change:transform;
+    }
+    .el-partners:hover .el-partner-track{animation-play-state:paused;}
+    .el-partner-name{
+      direction:ltr;
       color:var(--ink);
-      transition:transform .25s var(--ease),border-color .25s ease,box-shadow .25s ease;
+      opacity:.55;
+      white-space:nowrap;
+      font-size:clamp(30px,3.4vw,50px);
+      line-height:1;
+      font-weight:700;
+      letter-spacing:.03em;
     }
-    .el-partner-card:hover{transform:translateY(-3px);border-color:rgba(120,80,205,.3);box-shadow:0 20px 48px -38px rgba(60,30,90,.55);}
-    .el-partner-mark{
-      width:44px;
-      height:44px;
-      border-radius:14px;
-      flex:0 0 auto;
-      display:grid;
-      place-items:center;
-      color:#fff;
-      background:var(--brand-tone);
-      font-size:13px;
-      font-weight:900;
-      letter-spacing:0;
-      box-shadow:0 12px 28px -20px color-mix(in srgb,var(--brand-tone) 80%,#000);
-    }
-    .el-partner-word{min-width:0;}
-    .el-partner-word b{display:block;font-size:15px;line-height:1.4;}
-    .el-partner-word small{display:block;margin-top:4px;color:var(--muted);font-size:11px;font-weight:700;}
     .el-products{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin-bottom:clamp(34px,4vw,56px);}
     .el-card{
       background:var(--surface);
@@ -737,14 +719,14 @@
       .el-latest-head{align-items:flex-start;}
       .el-latest-track{grid-auto-columns:min(78vw,320px);padding-inline:48px;}
       .el-latest-scroll{width:38px;height:38px;}
-      .el-partners-head{align-items:flex-start;}
-      .el-partner-grid{grid-template-columns:1fr 1fr;}
-      .el-partner-card{min-height:78px;padding:12px;}
-      .el-partner-mark{width:38px;height:38px;border-radius:12px;font-size:11px;}
+      .el-partners{padding-block:64px;}
+      .el-partners-head{margin-bottom:36px;}
+      .el-partner-track{gap:42px;animation-duration:26s;}
+      .el-partner-name{font-size:clamp(28px,10vw,42px);}
     }
     @media (prefers-reduced-motion:reduce){
       *,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.001ms!important;}
-      .el-brand-logo,.el-brand-flower{animation:none!important;}
+      .el-brand-logo,.el-brand-flower,.el-partner-track{animation:none!important;}
       .el-hero video{display:none;}
       .el-hero{background:#d9cfe3 url("assets/eloria/ba-after.jpeg") center/cover no-repeat;}
     }
@@ -916,44 +898,26 @@
           </section>
           <section class="el-partners el-reveal" aria-labelledby="partnersTitle">
             <div class="el-partners-head">
-              <div>
-                <span>همکاری برندها</span>
-                <h3 id="partnersTitle">برندهایی که همکاری می‌کنیم</h3>
-              </div>
+              <span>همکاری برندها</span>
+              <h3 id="partnersTitle">برندهایی که همکاری می‌کنیم</h3>
             </div>
-            <div class="el-partner-grid" aria-label="لوگوی برندهای همکار">
-              <div class="el-partner-card" style="--brand-tone:#5b3aa8;" aria-label="SHEGLAM">
-                <span class="el-partner-mark">SG</span>
-                <span class="el-partner-word"><b>SHEGLAM</b><small>Makeup</small></span>
-              </div>
-              <div class="el-partner-card" style="--brand-tone:#c95072;" aria-label="Rare Beauty">
-                <span class="el-partner-mark">RB</span>
-                <span class="el-partner-word"><b>Rare Beauty</b><small>Beauty</small></span>
-              </div>
-              <div class="el-partner-card" style="--brand-tone:#151319;" aria-label="NYX Professional Makeup">
-                <span class="el-partner-mark">NYX</span>
-                <span class="el-partner-word"><b>NYX</b><small>Professional</small></span>
-              </div>
-              <div class="el-partner-card" style="--brand-tone:#2f8f5b;" aria-label="e.l.f. Cosmetics">
-                <span class="el-partner-mark">elf</span>
-                <span class="el-partner-word"><b>e.l.f.</b><small>Cosmetics</small></span>
-              </div>
-              <div class="el-partner-card" style="--brand-tone:#7850cd;" aria-label="Maybelline">
-                <span class="el-partner-mark">M</span>
-                <span class="el-partner-word"><b>Maybelline</b><small>New York</small></span>
-              </div>
-              <div class="el-partner-card" style="--brand-tone:#b5825f;" aria-label="L'Oreal Paris">
-                <span class="el-partner-mark">LP</span>
-                <span class="el-partner-word"><b>L'Oreal</b><small>Paris</small></span>
-              </div>
-              <div class="el-partner-card" style="--brand-tone:#8f2d4a;" aria-label="Catrice">
-                <span class="el-partner-mark">C</span>
-                <span class="el-partner-word"><b>Catrice</b><small>Makeup</small></span>
-              </div>
-              <div class="el-partner-card" style="--brand-tone:#e0a13a;" aria-label="Essence">
-                <span class="el-partner-mark">E</span>
-                <span class="el-partner-word"><b>Essence</b><small>Beauty</small></span>
-              </div>
+            <div class="el-partner-track" aria-label="برندهای همکار">
+              <span class="el-partner-name">SHEGLAM</span>
+              <span class="el-partner-name">FOCALLURE</span>
+              <span class="el-partner-name">MAYBELLINE</span>
+              <span class="el-partner-name">L’ORÉAL</span>
+              <span class="el-partner-name">NARS</span>
+              <span class="el-partner-name">M·A·C</span>
+              <span class="el-partner-name">NYX</span>
+              <span class="el-partner-name">e.l.f.</span>
+              <span class="el-partner-name" aria-hidden="true">SHEGLAM</span>
+              <span class="el-partner-name" aria-hidden="true">FOCALLURE</span>
+              <span class="el-partner-name" aria-hidden="true">MAYBELLINE</span>
+              <span class="el-partner-name" aria-hidden="true">L’ORÉAL</span>
+              <span class="el-partner-name" aria-hidden="true">NARS</span>
+              <span class="el-partner-name" aria-hidden="true">M·A·C</span>
+              <span class="el-partner-name" aria-hidden="true">NYX</span>
+              <span class="el-partner-name" aria-hidden="true">e.l.f.</span>
             </div>
           </section>
         </div>
