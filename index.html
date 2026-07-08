@@ -268,8 +268,8 @@
     .el-btn-primary{background:var(--primary);color:#fff;box-shadow:var(--shadow-cta);}
     .el-btn-primary:hover{background:#6841bd;color:#fff;}
     .el-btn-ghost{background:rgba(255,255,255,.14);color:#fff;border-color:rgba(255,255,255,.48);backdrop-filter:blur(10px);}
-    .el-btn-dark{background:var(--ink);color:#fff;}
-    .el-btn-dark:hover{background:var(--primary);color:#fff;}
+    .el-btn-dark{background:var(--primary);color:#fff;box-shadow:var(--shadow-cta);}
+    .el-btn-dark:hover{background:#6841bd;color:#fff;}
     .el-hero-strip{
       position:absolute;
       right:var(--gutter);
@@ -520,10 +520,10 @@
     .el-swatch{width:18px;height:18px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px var(--line);background:var(--swatch);}
     .el-price-row{display:grid;gap:10px;margin-top:auto;}
     .el-price{font-weight:800;color:var(--ink);}
-    .el-add{width:100%;min-height:44px;border:0;border-radius:12px;background:var(--ink);color:#fff;padding:12px 14px;font-size:13px;line-height:1.35;font-weight:800;display:flex;align-items:center;justify-content:center;transition:background .25s,transform .25s;}
+    .el-add{width:100%;min-height:44px;border:0;border-radius:12px;background:var(--primary);color:#fff;padding:12px 14px;font-size:13px;line-height:1.35;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-cta);transition:background .25s,transform .25s,box-shadow .25s;}
     .el-card .el-price-row{gap:14px;}
-    .el-card .el-add{min-height:64px;border-radius:16px;padding:18px 20px;font-size:15.5px;font-weight:900;box-shadow:0 18px 34px -22px rgba(21,19,25,.58);}
-    .el-add:hover{background:var(--primary);transform:translateY(-2px);}
+    .el-card .el-add{min-height:64px;border-radius:16px;padding:18px 20px;font-size:15.5px;font-weight:900;box-shadow:0 18px 34px -18px rgba(120,80,205,.72);}
+    .el-add:hover{background:#6841bd;transform:translateY(-2px);box-shadow:0 20px 38px -18px rgba(120,80,205,.82);}
 
     .el-ba-grid{display:grid;grid-template-columns:minmax(0,.92fr) minmax(320px,.58fr);gap:clamp(22px,4vw,50px);align-items:center;}
     .el-ba-frame{
@@ -1044,7 +1044,7 @@
               <h2>حساب کاربری و سبد خرید آماده است.</h2>
               <p id="accountText">برای ذخیره سبد خرید، سفارش نمونه و مشاهده وضعیت ورود، وارد حساب ELORIA شوید.</p>
             </div>
-            <button class="el-btn" type="button" data-action="open-auth">ورود / ثبت نام</button>
+            <button class="el-btn el-btn-primary" type="button" data-action="open-auth">ورود / ثبت نام</button>
           </div>
         </div>
       </section>
