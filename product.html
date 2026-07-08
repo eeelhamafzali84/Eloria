@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f2ecfb">
+  <title>جزئیات محصول | ELORIA</title>
+  <style>
+    @font-face{font-family:IRANSans;font-weight:300;font-display:swap;src:url("assets/eloria/iransans-300.woff2") format("woff2");}
+    @font-face{font-family:IRANSans;font-weight:400;font-display:swap;src:url("assets/eloria/iransans-400.woff2") format("woff2");}
+    @font-face{font-family:IRANSans;font-weight:500;font-display:swap;src:url("assets/eloria/iransans-500.woff2") format("woff2");}
+    @font-face{font-family:IRANSans;font-weight:700;font-display:swap;src:url("assets/eloria/iransans-700.woff2") format("woff2");}
+
+    :root{
+      --page:#f2ecfb;
+      --bg:#fff;
+      --surface:#f6f5f8;
+      --ink:#151319;
+      --ink-deep:#2b2038;
+      --muted:#726d7a;
+      --line:#eae7ef;
+      --primary:#7850cd;
+      --primary-2:#9a7ce6;
+      --primary-soft:#f1ecfa;
+      --star:#e0a13a;
+      --radius:16px;
+      --gutter:clamp(20px,4vw,56px);
+      --ease:cubic-bezier(.2,.7,.2,1);
+      --shadow:0 30px 70px -46px rgba(60,30,90,.55);
+      --shadow-cta:0 14px 34px -14px rgba(120,80,205,.75);
+      --font:IRANSans,Vazirmatn,Tahoma,sans-serif;
+    }
+
+    *{box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{margin:0;background:var(--page);color:var(--ink);font-family:var(--font);-webkit-font-smoothing:antialiased;}
+    a{color:inherit;text-decoration:none;}
+    img{max-width:100%;display:block;}
+    button,input{font:inherit;}
+    button{cursor:pointer;}
+    :focus-visible{outline:2px solid var(--primary);outline-offset:4px;}
+    ::selection{background:var(--primary);color:#fff;}
+
+    .el-app{min-height:100vh;overflow:hidden;}
+    .el-container{width:min(1320px,100%);margin:0 auto;padding-inline:var(--gutter);}
+    .el-nav{
+      position:sticky;
+      top:0;
+      z-index:50;
+      min-height:78px;
+      padding:10px var(--gutter);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      background:rgba(255,255,255,.86);
+      border-bottom:1px solid var(--line);
+      backdrop-filter:blur(16px);
+      direction:ltr;
+    }
+    .el-brand{display:flex;align-items:center;justify-content:center;flex-direction:column;color:#56375c;line-height:1;direction:ltr;}
+    .el-brand-logo{display:flex;align-items:center;font-weight:700;font-size:clamp(30px,4vw,42px);letter-spacing:0;font-family:Georgia,serif;font-style:italic;}
+    .el-brand-sub{font-size:7px;font-weight:700;letter-spacing:.42em;margin-top:4px;}
+    .el-navlinks{display:flex;align-items:center;gap:clamp(14px,2vw,28px);font-size:13px;font-weight:700;color:var(--muted);direction:rtl;}
+    .el-actions{display:flex;align-items:center;gap:10px;}
+    .el-icon-btn{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--ink);display:grid;place-items:center;position:relative;}
+    .el-badge{position:absolute;top:-6px;left:-4px;min-width:20px;height:20px;border-radius:20px;background:var(--primary);color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center;padding-inline:5px;}
+
+    .el-main{padding:clamp(34px,5vw,70px) 0 clamp(70px,9vw,120px);}
+    .el-back{display:inline-flex;align-items:center;gap:8px;color:var(--primary);font-size:13px;font-weight:800;margin-bottom:22px;}
+    .el-detail{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) minmax(330px,.78fr);
+      gap:clamp(28px,5vw,76px);
+      align-items:start;
+    }
+    .el-gallery{display:grid;grid-template-columns:92px minmax(0,1fr);gap:16px;position:sticky;top:106px;}
+    .el-thumbs{display:grid;gap:12px;align-content:start;}
+    .el-thumb-btn{border:1px solid var(--line);border-radius:14px;background:#fff;padding:5px;overflow:hidden;transition:border-color .25s,transform .25s;}
+    .el-thumb-btn.is-active{border-color:var(--primary);box-shadow:0 10px 26px -20px rgba(120,80,205,.8);}
+    .el-thumb-btn img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:10px;background:var(--surface);}
+    .el-main-image{
+      border:1px solid var(--line);
+      border-radius:calc(var(--radius) + 12px);
+      background:#fff;
+      padding:8px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .el-main-image img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:calc(var(--radius) + 4px);background:var(--surface);}
+
+    .el-info{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:calc(var(--radius) + 12px);
+      padding:clamp(22px,3.8vw,42px);
+      box-shadow:var(--shadow);
+    }
+    .el-brand-pill{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(120,80,205,.18);background:var(--primary-soft);color:var(--primary);border-radius:999px;padding:8px 13px;font-size:12px;font-weight:800;}
+    .el-title{margin:18px 0 10px;font-size:clamp(30px,4vw,50px);line-height:1.35;color:var(--ink);letter-spacing:0;}
+    .el-rating{display:flex;align-items:center;gap:9px;flex-wrap:wrap;color:var(--muted);font-size:13px;margin:0 0 22px;}
+    .el-stars{color:var(--star);letter-spacing:2px;}
+    .el-price{font-size:clamp(24px,3vw,34px);font-weight:700;color:var(--ink);margin:18px 0 0;}
+    .el-desc{margin:18px 0 0;color:var(--muted);font-size:15px;line-height:2.1;}
+    .el-options{display:grid;gap:22px;margin:28px 0;}
+    .el-option-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;color:var(--ink);font-size:13px;font-weight:800;}
+    .el-swatches{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+    .el-swatch{width:34px;height:34px;border-radius:50%;border:1px solid rgba(0,0,0,.08);background:var(--swatch);box-shadow:inset 0 0 0 4px #fff;transition:transform .2s,box-shadow .2s;}
+    .el-swatch.is-active{transform:scale(1.08);box-shadow:0 0 0 2px var(--primary),inset 0 0 0 4px #fff;}
+    .el-qty{display:inline-flex;align-items:center;gap:2px;border:1px solid var(--line);border-radius:999px;padding:5px;background:#fff;}
+    .el-qty button{width:36px;height:36px;border:0;border-radius:50%;background:var(--surface);color:var(--ink);display:grid;place-items:center;}
+    .el-qty strong{min-width:34px;text-align:center;font-size:15px;}
+    .el-actions-row{display:grid;grid-template-columns:1fr auto;gap:12px;margin-top:22px;}
+    .el-add,.el-outline{
+      min-height:56px;
+      border-radius:14px;
+      font-weight:800;
+      border:1px solid transparent;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:9px;
+      transition:transform .25s var(--ease),filter .25s;
+    }
+    .el-add{background:var(--primary);color:#fff;box-shadow:var(--shadow-cta);}
+    .el-outline{background:#fff;color:var(--primary);border-color:rgba(120,80,205,.28);padding-inline:20px;}
+    .el-add:hover,.el-outline:hover{transform:translateY(-2px);}
+    .el-trust{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:24px;}
+    .el-trust div{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:13px;text-align:center;color:var(--muted);font-size:12px;line-height:1.8;}
+    .el-panel{margin-top:24px;border-top:1px solid var(--line);padding-top:22px;}
+    .el-panel h2{font-size:17px;margin:0 0 12px;}
+    .el-panel ul{margin:0;padding:0 18px 0 0;color:var(--muted);line-height:2.1;font-size:14px;}
+
+    .el-related{padding-top:clamp(60px,8vw,96px);}
+    .el-section-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:18px;}
+    .el-section-head span{display:block;color:var(--primary);font-size:12px;font-weight:800;margin-bottom:4px;}
+    .el-section-head h2{margin:0;font-size:clamp(24px,3vw,38px);}
+    .el-related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;}
+    .el-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:6px;box-shadow:0 24px 56px -42px rgba(60,30,90,.45);transition:transform .25s,border-color .25s;}
+    .el-card:hover{transform:translateY(-3px);border-color:rgba(120,80,205,.28);}
+    .el-card img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:12px;background:var(--surface);}
+    .el-card-body{padding:13px 10px 10px;display:grid;gap:8px;}
+    .el-card h3{font-size:14px;line-height:1.7;margin:0;min-height:48px;}
+    .el-card p{margin:0;color:var(--primary);font-weight:800;font-size:13px;}
+
+    .el-toast{position:fixed;right:50%;bottom:24px;z-index:80;transform:translate(50%,16px);opacity:0;pointer-events:none;background:#151319;color:#fff;border-radius:999px;padding:13px 18px;font-size:13px;font-weight:700;box-shadow:0 20px 50px -30px rgba(0,0,0,.6);transition:opacity .25s,transform .25s;}
+    .el-toast.is-open{opacity:1;transform:translate(50%,0);}
+
+    @media (max-width:900px){
+      .el-navlinks{display:none;}
+      .el-detail{grid-template-columns:1fr;}
+      .el-gallery{position:relative;top:auto;grid-template-columns:1fr;}
+      .el-thumbs{display:flex;overflow:auto;order:2;padding-bottom:4px;}
+      .el-thumb-btn{width:76px;flex:0 0 auto;}
+      .el-related-grid{grid-template-columns:1fr 1fr;}
+      .el-trust{grid-template-columns:1fr;}
+    }
+    @media (max-width:560px){
+      .el-nav{padding-inline:16px;}
+      .el-actions-row{grid-template-columns:1fr;}
+      .el-related-grid{grid-template-columns:1fr;}
+      .el-info{padding:20px;}
+      .el-title{font-size:28px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="el-app">
+    <nav class="el-nav" aria-label="ناوبری اصلی">
+      <div class="el-actions">
+        <a class="el-icon-btn" href="checkout.html" aria-label="سبد خرید">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8h17l-1.14 11.4a2 2 0 0 1-2 1.8H6.64a2 2 0 0 1-2-1.8L3.5 8Z"></path><path d="M8 8V6.5a4 4 0 0 1 8 0V8"></path></svg>
+          <span class="el-badge" id="cartBadge">۰</span>
+        </a>
+      </div>
+      <div class="el-navlinks">
+        <a href="index.html#categories">فروشگاه</a>
+        <a href="index.html#products">پرفروش‌ها</a>
+        <a href="index.html#latest-products">جدیدترین‌ها</a>
+        <a href="index.html#reviews">نظرات</a>
+      </div>
+      <a class="el-brand" href="index.html" aria-label="ELORIA">
+        <span class="el-brand-logo">Eloria</span>
+        <span class="el-brand-sub">COSMETICS</span>
+      </a>
+    </nav>
+
+    <main class="el-main">
+      <div class="el-container">
+        <a class="el-back" href="index.html#latest-products">بازگشت به جدیدترین محصولات</a>
+        <section class="el-detail" aria-labelledby="productTitle">
+          <div class="el-gallery" aria-label="گالری محصول">
+            <div class="el-thumbs" id="thumbs"></div>
+            <div class="el-main-image">
+              <img id="mainImage" src="assets/eloria/product-1.webp" alt="محصول الوریا">
+            </div>
+          </div>
+          <article class="el-info">
+            <span class="el-brand-pill" id="productBrand"></span>
+            <h1 class="el-title" id="productTitle"></h1>
+            <div class="el-rating"><span class="el-stars">★★★★★</span><span id="productRating"></span></div>
+            <div class="el-price" id="productPrice"></div>
+            <p class="el-desc" id="productDesc"></p>
+
+            <div class="el-options">
+              <div>
+                <div class="el-option-title"><span>انتخاب رنگ</span><span id="selectedShade"></span></div>
+                <div class="el-swatches" id="swatches"></div>
+              </div>
+              <div>
+                <div class="el-option-title"><span>تعداد</span><span>آماده ارسال</span></div>
+                <div class="el-qty">
+                  <button type="button" data-qty="-1" aria-label="کاهش تعداد">−</button>
+                  <strong id="qty">۱</strong>
+                  <button type="button" data-qty="1" aria-label="افزایش تعداد">+</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="el-actions-row">
+              <button class="el-add" type="button" id="addBtn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+                افزودن به سبد خرید
+              </button>
+              <button class="el-outline" type="button" id="wishBtn">قلب</button>
+            </div>
+
+            <div class="el-trust" aria-label="مزایای خرید">
+              <div><strong>ارسال سریع</strong><br>پردازش سفارش در همان روز</div>
+              <div><strong>اصالت کالا</strong><br>محصول وارداتی و بررسی شده</div>
+              <div><strong>بازگشت آسان</strong><br>پشتیبانی تا رسیدن سفارش</div>
+            </div>
+
+            <div class="el-panel">
+              <h2>جزئیات محصول</h2>
+              <ul id="productBullets"></ul>
+            </div>
+          </article>
+        </section>
+
+        <section class="el-related" aria-labelledby="relatedTitle">
+          <div class="el-section-head">
+            <div>
+              <span>پیشنهاد الوریا</span>
+              <h2 id="relatedTitle">محصولات مشابه</h2>
+            </div>
+            <a class="el-back" href="index.html#products">مشاهده همه</a>
+          </div>
+          <div class="el-related-grid" id="relatedGrid"></div>
+        </section>
+      </div>
+    </main>
+    <div class="el-toast" id="toast" role="status" aria-live="polite"></div>
+  </div>
+
+  <script>
+    const products = [
+      {id:"p1",cat:"face",brand:"SHEGLAM",name:"پودر فیکس کننده مات",price:5200000,rating:"۴.۹",reviews:"۲۱۴۰",img:"assets/eloria/product-1.webp",swatches:["#e9c3a3","#d8a984","#b5825f"],shades:["Vanilla","Natural","Honey"],desc:"پودر فیکس سبک با جلوه مات و مخملی که برق پوست را کنترل می‌کند و آرایش را تمیز و یکدست نگه می‌دارد.",bullets:["بافت نرم و سبک برای استفاده روزانه","مناسب تثبیت کانسیلر و کرم‌پودر","جلوه مات بدون سنگین کردن پوست"]},
+      {id:"p2",cat:"lip",brand:"SHEGLAM",name:"رژگونه و رژ لب کوشن",price:3800000,rating:"۴.۸",reviews:"۱۸۷۶",img:"assets/eloria/product-2.webp",swatches:["#b23a5b","#8f2d4a","#d6647f"],shades:["Berry","Rose","Coral"],desc:"کوشن چندکاره با رنگ‌دهی قابل کنترل برای لب و گونه؛ مناسب آرایش روزانه، سریع و لطیف.",bullets:["قابل استفاده برای لب و گونه","فینیش طبیعی و قابل لایه‌سازی","اپلیکاتور نرم برای پخش سریع"]},
+      {id:"p3",cat:"skin",brand:"SHEGLAM",name:"سرم آبرسان نیاسیناماید",price:7400000,rating:"۴.۹",reviews:"۹۸۰",img:"assets/eloria/product-3.webp",swatches:["#c9a7e6","#f1ecfa","#bca5df"],shades:["Glow","Calm","Balance"],desc:"سرم سبک برای آبرسانی روزانه و کمک به شفافیت ظاهر پوست، با جذب سریع و حس غیرچسبنده.",bullets:["جذب سریع و مناسب زیر آرایش","کمک به لطافت و شفافیت پوست","فرمول سبک برای روتین روزانه"]},
+      {id:"p4",cat:"eye",brand:"SHEGLAM",name:"پالت سایه Love N Taupe",price:6400000,rating:"۴.۷",reviews:"۱۳۲۰",img:"assets/eloria/product-4.webp",swatches:["#caa06f","#a5764c","#7b5535"],shades:["Soft Taupe","Warm Brown","Deep Cocoa"],desc:"پالت سایه با طیف تاپ و قهوه‌ای برای آرایش چشم روزانه تا اسموکی ملایم.",bullets:["ترکیب رنگ‌های مات و درخشان","پیگمنت مناسب و قابل ترکیب","مناسب آرایش روزانه و مهمانی"]}
+    ];
+
+    const state = {
+      cart: readJson("eloria_cart", {}),
+      favorites: readJson("eloria_favorites", {}),
+      qty: 1,
+      shade: 0,
+      gallery: 0
+    };
+
+    const els = {
+      badge: document.getElementById("cartBadge"),
+      title: document.getElementById("productTitle"),
+      brand: document.getElementById("productBrand"),
+      rating: document.getElementById("productRating"),
+      price: document.getElementById("productPrice"),
+      desc: document.getElementById("productDesc"),
+      mainImage: document.getElementById("mainImage"),
+      thumbs: document.getElementById("thumbs"),
+      swatches: document.getElementById("swatches"),
+      shade: document.getElementById("selectedShade"),
+      qty: document.getElementById("qty"),
+      bullets: document.getElementById("productBullets"),
+      add: document.getElementById("addBtn"),
+      wish: document.getElementById("wishBtn"),
+      related: document.getElementById("relatedGrid"),
+      toast: document.getElementById("toast")
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const product = products.find(item => item.id === params.get("id")) || products[0];
+
+    function readJson(key, fallback){
+      try{ const raw = localStorage.getItem(key); return raw ? JSON.parse(raw) : fallback; }catch(e){ return fallback; }
+    }
+    function saveJson(key, value){
+      try{ localStorage.setItem(key, JSON.stringify(value)); }catch(e){}
+    }
+    function faDigits(value){
+      return String(value).replace(/[0-9]/g, d => "۰۱۲۳۴۵۶۷۸۹"[Number(d)]);
+    }
+    function money(value){
+      return faDigits(Math.round(value).toLocaleString("en-US").replace(/,/g,"٬")) + " تومان";
+    }
+    function cartCount(){
+      return Object.values(state.cart).reduce((sum,item) => sum + item.qty, 0);
+    }
+    function updateBadge(){
+      els.badge.textContent = faDigits(cartCount());
+    }
+    function galleryImages(){
+      const related = products.filter(item => item.id !== product.id).map(item => item.img);
+      return [product.img, ...related].slice(0, 4);
+    }
+    function render(){
+      document.title = `${product.name} | ELORIA`;
+      els.title.textContent = product.name;
+      els.brand.textContent = product.brand;
+      els.rating.textContent = `${product.rating} · ${product.reviews} نظر`;
+      els.price.textContent = money(product.price);
+      els.desc.textContent = product.desc;
+      els.mainImage.src = galleryImages()[state.gallery];
+      els.mainImage.alt = product.name;
+      els.shade.textContent = product.shades[state.shade] || "";
+      els.qty.textContent = faDigits(state.qty);
+      els.bullets.innerHTML = product.bullets.map(item => `<li>${item}</li>`).join("");
+      els.wish.classList.toggle("is-on", !!state.favorites[product.id]);
+      els.wish.textContent = state.favorites[product.id] ? "حذف از انتخاب‌ها" : "افزودن به انتخاب‌ها";
+
+      els.thumbs.innerHTML = galleryImages().map((img,index) => `
+        <button class="el-thumb-btn${index === state.gallery ? " is-active" : ""}" type="button" data-gallery="${index}" aria-label="تصویر ${faDigits(index + 1)}">
+          <img src="${img}" alt="${product.name}" loading="lazy">
+        </button>
+      `).join("");
+      els.swatches.innerHTML = product.swatches.map((color,index) => `
+        <button class="el-swatch${index === state.shade ? " is-active" : ""}" type="button" data-shade="${index}" style="--swatch:${color}" aria-label="${product.shades[index] || "رنگ"}"></button>
+      `).join("");
+      els.related.innerHTML = products.filter(item => item.id !== product.id).map(item => `
+        <a class="el-card" href="product.html?id=${item.id}">
+          <img src="${item.img}" alt="${item.name}" loading="lazy">
+          <div class="el-card-body">
+            <h3>${item.name}</h3>
+            <p>${money(item.price)}</p>
+          </div>
+        </a>
+      `).join("");
+      updateBadge();
+    }
+    function addToCart(){
+      const current = state.cart[product.id] || {...product, qty:0};
+      state.cart[product.id] = {...current, qty: current.qty + state.qty, selectedShade: product.shades[state.shade]};
+      saveJson("eloria_cart", state.cart);
+      updateBadge();
+      showToast(`${product.name} به سبد خرید اضافه شد.`);
+    }
+    function toggleWish(){
+      if(state.favorites[product.id]) delete state.favorites[product.id];
+      else state.favorites[product.id] = true;
+      saveJson("eloria_favorites", state.favorites);
+      render();
+      showToast(state.favorites[product.id] ? "به انتخاب‌های شما اضافه شد." : "از انتخاب‌های شما حذف شد.");
+    }
+    function showToast(message){
+      els.toast.textContent = message;
+      els.toast.classList.add("is-open");
+      clearTimeout(showToast.timer);
+      showToast.timer = setTimeout(() => els.toast.classList.remove("is-open"), 2300);
+    }
+
+    document.addEventListener("click", event => {
+      const gallery = event.target.closest("[data-gallery]");
+      if(gallery){ state.gallery = Number(gallery.dataset.gallery); render(); }
+      const shade = event.target.closest("[data-shade]");
+      if(shade){ state.shade = Number(shade.dataset.shade); render(); }
+      const qty = event.target.closest("[data-qty]");
+      if(qty){
+        state.qty = Math.max(1, Math.min(9, state.qty + Number(qty.dataset.qty)));
+        render();
+      }
+    });
+    els.add.addEventListener("click", addToCart);
+    els.wish.addEventListener("click", toggleWish);
+    render();
+  </script>
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f2ecfb">
+  <title>تسویه حساب | ELORIA</title>
+  <style>
+    @font-face{font-family:IRANSans;font-weight:300;font-display:swap;src:url("assets/eloria/iransans-300.woff2") format("woff2");}
+    @font-face{font-family:IRANSans;font-weight:400;font-display:swap;src:url("assets/eloria/iransans-400.woff2") format("woff2");}
+    @font-face{font-family:IRANSans;font-weight:500;font-display:swap;src:url("assets/eloria/iransans-500.woff2") format("woff2");}
+    @font-face{font-family:IRANSans;font-weight:700;font-display:swap;src:url("assets/eloria/iransans-700.woff2") format("woff2");}
+
+    :root{
+      --page:#f2ecfb;
+      --bg:#fff;
+      --surface:#f6f5f8;
+      --ink:#151319;
+      --muted:#726d7a;
+      --line:#eae7ef;
+      --primary:#7850cd;
+      --primary-soft:#f1ecfa;
+      --success:#2f8f5b;
+      --radius:16px;
+      --gutter:clamp(20px,4vw,56px);
+      --shadow:0 30px 70px -46px rgba(60,30,90,.55);
+      --shadow-cta:0 14px 34px -14px rgba(120,80,205,.75);
+      --font:IRANSans,Vazirmatn,Tahoma,sans-serif;
+    }
+
+    *{box-sizing:border-box;}
+    body{margin:0;background:var(--page);color:var(--ink);font-family:var(--font);-webkit-font-smoothing:antialiased;}
+    a{color:inherit;text-decoration:none;}
+    img{max-width:100%;display:block;}
+    button,input,textarea{font:inherit;}
+    button{cursor:pointer;}
+    :focus-visible{outline:2px solid var(--primary);outline-offset:4px;}
+    ::selection{background:var(--primary);color:#fff;}
+
+    .el-container{width:min(1260px,100%);margin:0 auto;padding-inline:var(--gutter);}
+    .el-nav{
+      min-height:78px;
+      padding:10px var(--gutter);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      background:rgba(255,255,255,.86);
+      border-bottom:1px solid var(--line);
+      backdrop-filter:blur(16px);
+      direction:ltr;
+      position:sticky;
+      top:0;
+      z-index:20;
+    }
+    .el-brand{display:flex;align-items:center;justify-content:center;flex-direction:column;color:#56375c;line-height:1;direction:ltr;}
+    .el-brand-logo{font-family:Georgia,serif;font-style:italic;font-size:clamp(30px,4vw,42px);font-weight:700;}
+    .el-brand-sub{font-size:7px;font-weight:700;letter-spacing:.42em;margin-top:4px;}
+    .el-navlinks{display:flex;align-items:center;gap:clamp(14px,2vw,28px);font-size:13px;font-weight:700;color:var(--muted);direction:rtl;}
+    .el-back{display:inline-flex;align-items:center;gap:8px;color:var(--primary);font-size:13px;font-weight:800;}
+
+    .el-main{padding:clamp(34px,5vw,70px) 0 clamp(70px,9vw,120px);}
+    .el-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:24px;}
+    .el-head span{display:block;color:var(--primary);font-size:13px;font-weight:800;margin-bottom:8px;}
+    .el-head h1{margin:0;font-size:clamp(30px,4.4vw,56px);line-height:1.25;}
+    .el-steps{display:flex;align-items:center;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:12px;font-weight:800;}
+    .el-step{display:flex;align-items:center;gap:8px;}
+    .el-step i{width:26px;height:26px;border-radius:50%;background:var(--primary);color:#fff;font-style:normal;display:grid;place-items:center;font-size:12px;}
+
+    .el-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(330px,420px);gap:clamp(20px,4vw,42px);align-items:start;}
+    .el-form{display:grid;gap:16px;}
+    .el-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:calc(var(--radius) + 8px);
+      padding:clamp(20px,3vw,30px);
+      box-shadow:var(--shadow);
+    }
+    .el-card h2{margin:0 0 16px;font-size:20px;}
+    .el-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+    .el-field{display:grid;gap:8px;}
+    .el-field.full{grid-column:1/-1;}
+    .el-field label{font-size:12px;font-weight:800;color:var(--ink);}
+    .el-field input,.el-field textarea{
+      width:100%;
+      border:1px solid var(--line);
+      background:var(--surface);
+      border-radius:14px;
+      padding:13px 14px;
+      color:var(--ink);
+      min-height:48px;
+      outline:none;
+      transition:border-color .2s,background .2s;
+    }
+    .el-field textarea{resize:vertical;min-height:96px;line-height:1.8;}
+    .el-field input:focus,.el-field textarea:focus{border-color:rgba(120,80,205,.55);background:#fff;}
+    .el-choice-grid{display:grid;gap:12px;}
+    .el-choice{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:15px;
+      background:#fff;
+      cursor:pointer;
+      transition:border-color .2s,background .2s,transform .2s;
+    }
+    .el-choice:hover{border-color:rgba(120,80,205,.28);transform:translateY(-1px);}
+    .el-choice input{accent-color:var(--primary);width:18px;height:18px;}
+    .el-choice strong{display:block;font-size:14px;margin-bottom:4px;}
+    .el-choice span{display:block;font-size:12px;color:var(--muted);line-height:1.8;}
+    .el-choice b{margin-right:auto;white-space:nowrap;color:var(--primary);font-size:13px;}
+
+    .el-summary{position:sticky;top:100px;display:grid;gap:14px;}
+    .el-items{display:grid;gap:12px;margin-top:4px;}
+    .el-item{display:grid;grid-template-columns:70px 1fr;gap:12px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:12px;}
+    .el-item:last-child{border-bottom:0;padding-bottom:0;}
+    .el-item img{width:70px;height:84px;border-radius:12px;object-fit:cover;background:var(--surface);}
+    .el-item h3{margin:0;font-size:13px;line-height:1.7;}
+    .el-item p{margin:5px 0 0;color:var(--muted);font-size:12px;}
+    .el-row{display:flex;align-items:center;justify-content:space-between;gap:14px;color:var(--muted);font-size:14px;}
+    .el-row strong{color:var(--ink);}
+    .el-total{border-top:1px solid var(--line);padding-top:14px;margin-top:4px;}
+    .el-total strong{font-size:20px;color:var(--primary);}
+    .el-submit{
+      width:100%;
+      min-height:58px;
+      border:0;
+      border-radius:15px;
+      background:var(--primary);
+      color:#fff;
+      font-weight:800;
+      box-shadow:var(--shadow-cta);
+      transition:transform .25s,filter .25s;
+    }
+    .el-submit:hover{transform:translateY(-2px);filter:brightness(1.05);}
+    .el-note{margin:0;color:var(--muted);font-size:12px;line-height:1.9;text-align:center;}
+    .el-empty{display:none;text-align:center;padding:50px 20px;color:var(--muted);line-height:2;background:#fff;border:1px solid var(--line);border-radius:calc(var(--radius) + 8px);box-shadow:var(--shadow);}
+    body.is-empty .el-layout,body.is-empty .el-head{display:none;}
+    body.is-empty .el-empty{display:block;}
+
+    .el-toast{position:fixed;right:50%;bottom:24px;z-index:80;transform:translate(50%,16px);opacity:0;pointer-events:none;background:#151319;color:#fff;border-radius:999px;padding:13px 18px;font-size:13px;font-weight:700;box-shadow:0 20px 50px -30px rgba(0,0,0,.6);transition:opacity .25s,transform .25s;}
+    .el-toast.is-open{opacity:1;transform:translate(50%,0);}
+
+    @media (max-width:900px){
+      .el-navlinks{display:none;}
+      .el-head{align-items:flex-start;flex-direction:column;}
+      .el-layout{grid-template-columns:1fr;}
+      .el-summary{position:static;order:-1;}
+    }
+    @media (max-width:560px){
+      .el-grid{grid-template-columns:1fr;}
+      .el-card{padding:18px;}
+    }
+  </style>
+</head>
+<body>
+  <nav class="el-nav" aria-label="ناوبری اصلی">
+    <a class="el-back" href="index.html#products">ادامه خرید</a>
+    <div class="el-navlinks">
+      <a href="index.html#categories">فروشگاه</a>
+      <a href="index.html#latest-products">جدیدترین‌ها</a>
+      <a href="index.html#reviews">نظرات</a>
+    </div>
+    <a class="el-brand" href="index.html" aria-label="ELORIA">
+      <span class="el-brand-logo">Eloria</span>
+      <span class="el-brand-sub">COSMETICS</span>
+    </a>
+  </nav>
+
+  <main class="el-main">
+    <div class="el-container">
+      <div class="el-empty" id="emptyState">
+        <h1>سبد خرید شما خالی است</h1>
+        <p>برای تست فلو تسویه، اول یک محصول به سبد اضافه کنید.</p>
+        <a class="el-submit" style="display:inline-flex;width:auto;min-width:190px;align-items:center;justify-content:center;padding-inline:24px;" href="index.html#latest-products">رفتن به محصولات</a>
+      </div>
+
+      <header class="el-head">
+        <div>
+          <span>تسویه حساب امن</span>
+          <h1>تکمیل سفارش الوریا</h1>
+        </div>
+        <div class="el-steps" aria-label="مراحل تسویه">
+          <div class="el-step"><i>۱</i>اطلاعات</div>
+          <div class="el-step"><i>۲</i>ارسال</div>
+          <div class="el-step"><i>۳</i>پرداخت نمونه</div>
+        </div>
+      </header>
+
+      <div class="el-layout">
+        <form class="el-form" id="checkoutForm">
+          <section class="el-card">
+            <h2>اطلاعات گیرنده</h2>
+            <div class="el-grid">
+              <div class="el-field">
+                <label for="fullName">نام و نام خانوادگی</label>
+                <input id="fullName" name="fullName" autocomplete="name" required>
+              </div>
+              <div class="el-field">
+                <label for="phone">شماره موبایل</label>
+                <input id="phone" name="phone" inputmode="tel" autocomplete="tel" required>
+              </div>
+              <div class="el-field full">
+                <label for="address">آدرس کامل</label>
+                <textarea id="address" name="address" required placeholder="شهر، خیابان، پلاک، واحد"></textarea>
+              </div>
+              <div class="el-field">
+                <label for="postal">کد پستی</label>
+                <input id="postal" name="postal" inputmode="numeric" required>
+              </div>
+              <div class="el-field">
+                <label for="note">یادداشت سفارش</label>
+                <input id="note" name="note" placeholder="اختیاری">
+              </div>
+            </div>
+          </section>
+
+          <section class="el-card">
+            <h2>روش ارسال</h2>
+            <div class="el-choice-grid">
+              <label class="el-choice">
+                <input type="radio" name="shipping" value="standard" data-fee="0" checked>
+                <span><strong>ارسال استاندارد الوریا</strong><span>تحویل نمونه طی ۲ تا ۴ روز کاری</span></span>
+                <b>رایگان</b>
+              </label>
+              <label class="el-choice">
+                <input type="radio" name="shipping" value="express" data-fee="250000">
+                <span><strong>ارسال سریع</strong><span>برای تست فلو، هزینه به جمع سفارش اضافه می‌شود</span></span>
+                <b>۲۵۰٬۰۰۰ تومان</b>
+              </label>
+            </div>
+          </section>
+
+          <section class="el-card">
+            <h2>پرداخت</h2>
+            <div class="el-choice-grid">
+              <label class="el-choice">
+                <input type="radio" name="payment" value="sample" checked>
+                <span><strong>پرداخت نمونه</strong><span>بدون اتصال بانکی، مناسب تست کامل مراحل</span></span>
+                <b>فعال</b>
+              </label>
+              <label class="el-choice">
+                <input type="radio" name="payment" value="cod">
+                <span><strong>پرداخت هنگام تحویل</strong><span>گزینه نمایشی برای کامل بودن فلو</span></span>
+                <b>نمونه</b>
+              </label>
+            </div>
+          </section>
+        </form>
+
+        <aside class="el-summary">
+          <section class="el-card">
+            <h2>خلاصه سفارش</h2>
+            <div class="el-items" id="items"></div>
+            <div class="el-row"><span>جمع محصولات</span><strong id="subtotal">۰ تومان</strong></div>
+            <div class="el-row"><span>ارسال</span><strong id="shippingFee">رایگان</strong></div>
+            <div class="el-row el-total"><span>مبلغ قابل پرداخت</span><strong id="total">۰ تومان</strong></div>
+            <button class="el-submit" type="submit" form="checkoutForm">ثبت سفارش نمونه</button>
+            <p class="el-note">در این نسخه هیچ پرداخت واقعی انجام نمی‌شود و سفارش فقط برای تست ذخیره می‌شود.</p>
+          </section>
+        </aside>
+      </div>
+    </div>
+  </main>
+  <div class="el-toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const state = {
+      cart: readJson("eloria_cart", {}),
+      user: readJson("eloria_user", null),
+      shippingFee: 0
+    };
+
+    const els = {
+      form: document.getElementById("checkoutForm"),
+      items: document.getElementById("items"),
+      subtotal: document.getElementById("subtotal"),
+      shippingFee: document.getElementById("shippingFee"),
+      total: document.getElementById("total"),
+      fullName: document.getElementById("fullName"),
+      phone: document.getElementById("phone"),
+      toast: document.getElementById("toast")
+    };
+
+    function readJson(key, fallback){
+      try{ const raw = localStorage.getItem(key); return raw ? JSON.parse(raw) : fallback; }catch(e){ return fallback; }
+    }
+    function saveJson(key, value){
+      try{ localStorage.setItem(key, JSON.stringify(value)); }catch(e){}
+    }
+    function faDigits(value){
+      return String(value).replace(/[0-9]/g, d => "۰۱۲۳۴۵۶۷۸۹"[Number(d)]);
+    }
+    function money(value){
+      if(!value) return "رایگان";
+      return faDigits(Math.round(value).toLocaleString("en-US").replace(/,/g,"٬")) + " تومان";
+    }
+    function items(){
+      return Object.values(state.cart);
+    }
+    function subtotal(){
+      return items().reduce((sum,item) => sum + item.price * item.qty, 0);
+    }
+    function render(){
+      if(!items().length){
+        document.body.classList.add("is-empty");
+        return;
+      }
+      els.fullName.value = state.user?.name || "";
+      els.phone.value = state.user?.phone || "";
+      els.items.innerHTML = items().map(item => `
+        <div class="el-item">
+          <img src="${item.img}" alt="${item.name}" loading="lazy">
+          <div>
+            <h3>${item.name}</h3>
+            <p>${item.brand} · ${faDigits(item.qty)} عدد · ${money(item.price * item.qty)}</p>
+          </div>
+        </div>
+      `).join("");
+      els.subtotal.textContent = money(subtotal());
+      els.shippingFee.textContent = money(state.shippingFee);
+      els.total.textContent = money(subtotal() + state.shippingFee);
+    }
+    function showToast(message){
+      els.toast.textContent = message;
+      els.toast.classList.add("is-open");
+      clearTimeout(showToast.timer);
+      showToast.timer = setTimeout(() => els.toast.classList.remove("is-open"), 2300);
+    }
+    function orderId(){
+      return "EL-" + new Date().getFullYear() + "-" + Math.floor(10000 + Math.random() * 90000);
+    }
+
+    document.addEventListener("change", event => {
+      const shipping = event.target.closest("input[name='shipping']");
+      if(shipping){
+        state.shippingFee = Number(shipping.dataset.fee || 0);
+        render();
+      }
+    });
+
+    els.form.addEventListener("submit", event => {
+      event.preventDefault();
+      if(!items().length){ showToast("سبد خرید خالی است."); return; }
+      if(!els.form.reportValidity()) return;
+      const data = new FormData(els.form);
+      const order = {
+        id: orderId(),
+        createdAt: new Date().toISOString(),
+        customer: {
+          name: data.get("fullName"),
+          phone: data.get("phone"),
+          address: data.get("address"),
+          postal: data.get("postal"),
+          note: data.get("note") || ""
+        },
+        shipping: data.get("shipping"),
+        payment: data.get("payment"),
+        items: items(),
+        subtotal: subtotal(),
+        shippingFee: state.shippingFee,
+        total: subtotal() + state.shippingFee
+      };
+      const orders = readJson("eloria_orders", []);
+      orders.unshift(order);
+      saveJson("eloria_orders", orders);
+      saveJson("eloria_last_order", order);
+      saveJson("eloria_cart", {});
+      window.location.href = "order-success.html";
+    });
+
+    render();
+  </script>
+</body>
+</html>

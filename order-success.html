@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f2ecfb">
+  <title>سفارش ثبت شد | ELORIA</title>
+  <style>
+    @font-face{font-family:IRANSans;font-weight:300;font-display:swap;src:url("assets/eloria/iransans-300.woff2") format("woff2");}
+    @font-face{font-family:IRANSans;font-weight:400;font-display:swap;src:url("assets/eloria/iransans-400.woff2") format("woff2");}
+    @font-face{font-family:IRANSans;font-weight:500;font-display:swap;src:url("assets/eloria/iransans-500.woff2") format("woff2");}
+    @font-face{font-family:IRANSans;font-weight:700;font-display:swap;src:url("assets/eloria/iransans-700.woff2") format("woff2");}
+
+    :root{
+      --page:#f2ecfb;
+      --bg:#fff;
+      --surface:#f6f5f8;
+      --ink:#151319;
+      --muted:#726d7a;
+      --line:#eae7ef;
+      --primary:#7850cd;
+      --primary-soft:#f1ecfa;
+      --success:#2f8f5b;
+      --radius:16px;
+      --gutter:clamp(20px,4vw,56px);
+      --shadow:0 30px 70px -46px rgba(60,30,90,.55);
+      --font:IRANSans,Vazirmatn,Tahoma,sans-serif;
+    }
+
+    *{box-sizing:border-box;}
+    body{margin:0;min-height:100vh;background:var(--page);color:var(--ink);font-family:var(--font);-webkit-font-smoothing:antialiased;}
+    a{color:inherit;text-decoration:none;}
+    img{max-width:100%;display:block;}
+    .el-container{width:min(1120px,100%);margin:0 auto;padding-inline:var(--gutter);}
+    .el-nav{
+      min-height:78px;
+      padding:10px var(--gutter);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      background:rgba(255,255,255,.86);
+      border-bottom:1px solid var(--line);
+      backdrop-filter:blur(16px);
+      direction:ltr;
+    }
+    .el-brand{display:flex;align-items:center;justify-content:center;flex-direction:column;color:#56375c;line-height:1;direction:ltr;}
+    .el-brand-logo{font-family:Georgia,serif;font-style:italic;font-size:clamp(30px,4vw,42px);font-weight:700;}
+    .el-brand-sub{font-size:7px;font-weight:700;letter-spacing:.42em;margin-top:4px;}
+    .el-back{display:inline-flex;align-items:center;gap:8px;color:var(--primary);font-size:13px;font-weight:800;}
+    .el-main{padding:clamp(42px,7vw,92px) 0 clamp(70px,9vw,120px);}
+    .el-hero{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:calc(var(--radius) + 12px);
+      padding:clamp(26px,5vw,58px);
+      box-shadow:var(--shadow);
+      display:grid;
+      grid-template-columns:minmax(0,1fr) minmax(280px,420px);
+      gap:clamp(24px,4vw,48px);
+      align-items:center;
+    }
+    .el-mark{width:72px;height:72px;border-radius:50%;background:var(--success);color:#fff;display:grid;place-items:center;margin-bottom:18px;}
+    .el-hero span{display:block;color:var(--primary);font-size:13px;font-weight:800;margin-bottom:8px;}
+    .el-hero h1{margin:0;font-size:clamp(32px,5vw,62px);line-height:1.25;}
+    .el-hero p{margin:16px 0 0;color:var(--muted);font-size:15px;line-height:2;}
+    .el-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:24px;}
+    .el-btn{min-height:52px;border-radius:14px;padding:0 22px;display:inline-flex;align-items:center;justify-content:center;font-weight:800;}
+    .el-primary{background:var(--primary);color:#fff;box-shadow:0 14px 34px -14px rgba(120,80,205,.75);}
+    .el-secondary{background:var(--primary-soft);color:var(--primary);border:1px solid rgba(120,80,205,.18);}
+    .el-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;}
+    .el-card h2{margin:0 0 14px;font-size:18px;}
+    .el-row{display:flex;justify-content:space-between;gap:14px;color:var(--muted);font-size:14px;padding:9px 0;border-bottom:1px solid var(--line);}
+    .el-row:last-child{border-bottom:0;}
+    .el-row strong{color:var(--ink);text-align:left;}
+    .el-items{margin-top:22px;display:grid;gap:12px;}
+    .el-item{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px;}
+    .el-item img{width:64px;height:72px;border-radius:10px;object-fit:cover;background:var(--surface);}
+    .el-item h3{margin:0;font-size:13px;line-height:1.7;}
+    .el-item p{margin:4px 0 0;color:var(--muted);font-size:12px;}
+    .el-empty{text-align:center;background:#fff;border:1px solid var(--line);border-radius:calc(var(--radius) + 12px);padding:clamp(36px,6vw,70px);box-shadow:var(--shadow);color:var(--muted);line-height:2;}
+
+    @media (max-width:840px){
+      .el-hero{grid-template-columns:1fr;}
+      .el-item{grid-template-columns:58px 1fr;}
+      .el-item strong{grid-column:2;}
+    }
+  </style>
+</head>
+<body>
+  <nav class="el-nav" aria-label="ناوبری اصلی">
+    <a class="el-back" href="index.html">بازگشت به خانه</a>
+    <a class="el-brand" href="index.html" aria-label="ELORIA">
+      <span class="el-brand-logo">Eloria</span>
+      <span class="el-brand-sub">COSMETICS</span>
+    </a>
+  </nav>
+
+  <main class="el-main">
+    <div class="el-container" id="app"></div>
+  </main>
+
+  <script>
+    const app = document.getElementById("app");
+    const order = readJson("eloria_last_order", null);
+
+    function readJson(key, fallback){
+      try{ const raw = localStorage.getItem(key); return raw ? JSON.parse(raw) : fallback; }catch(e){ return fallback; }
+    }
+    function faDigits(value){
+      return String(value).replace(/[0-9]/g, d => "۰۱۲۳۴۵۶۷۸۹"[Number(d)]);
+    }
+    function money(value){
+      if(!value) return "رایگان";
+      return faDigits(Math.round(value).toLocaleString("en-US").replace(/,/g,"٬")) + " تومان";
+    }
+    function paymentLabel(value){
+      return value === "cod" ? "پرداخت هنگام تحویل" : "پرداخت نمونه";
+    }
+    function shippingLabel(value){
+      return value === "express" ? "ارسال سریع" : "ارسال استاندارد الوریا";
+    }
+
+    if(!order){
+      app.innerHTML = `
+        <div class="el-empty">
+          <h1>سفارشی برای نمایش وجود ندارد</h1>
+          <p>برای دیدن صفحه تایید، یک سفارش نمونه از صفحه تسویه ثبت کنید.</p>
+          <a class="el-btn el-primary" href="index.html#latest-products">شروع خرید</a>
+        </div>
+      `;
+    }else{
+      app.innerHTML = `
+        <section class="el-hero">
+          <div>
+            <div class="el-mark" aria-hidden="true">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+            </div>
+            <span>سفارش نمونه با موفقیت ثبت شد</span>
+            <h1>مرسی، ${order.customer.name}</h1>
+            <p>شماره سفارش شما <strong>${order.id}</strong> است. این سفارش برای تست فلو ذخیره شده و پرداخت واقعی انجام نشده است.</p>
+            <div class="el-actions">
+              <a class="el-btn el-primary" href="index.html#latest-products">ادامه خرید</a>
+              <a class="el-btn el-secondary" href="checkout.html">بازگشت به تسویه</a>
+            </div>
+          </div>
+          <aside class="el-card">
+            <h2>خلاصه نهایی</h2>
+            <div class="el-row"><span>شماره سفارش</span><strong>${order.id}</strong></div>
+            <div class="el-row"><span>روش ارسال</span><strong>${shippingLabel(order.shipping)}</strong></div>
+            <div class="el-row"><span>روش پرداخت</span><strong>${paymentLabel(order.payment)}</strong></div>
+            <div class="el-row"><span>جمع محصولات</span><strong>${money(order.subtotal)}</strong></div>
+            <div class="el-row"><span>ارسال</span><strong>${money(order.shippingFee)}</strong></div>
+            <div class="el-row"><span>مبلغ نهایی</span><strong>${money(order.total)}</strong></div>
+          </aside>
+        </section>
+        <section class="el-items" aria-label="محصولات سفارش">
+          ${order.items.map(item => `
+            <div class="el-item">
+              <img src="${item.img}" alt="${item.name}" loading="lazy">
+              <div>
+                <h3>${item.name}</h3>
+                <p>${item.brand} · ${faDigits(item.qty)} عدد</p>
+              </div>
+              <strong>${money(item.price * item.qty)}</strong>
+            </div>
+          `).join("")}
+        </section>
+      `;
+    }
+  </script>
+</body>
+</html>
