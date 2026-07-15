@@ -58,9 +58,8 @@
       backdrop-filter:blur(16px);
       direction:ltr;
     }
-    .el-brand{display:flex;align-items:center;justify-content:center;flex-direction:column;color:#56375c;line-height:1;direction:ltr;}
-    .el-brand-logo{display:flex;align-items:center;font-weight:700;font-size:clamp(30px,4vw,42px);letter-spacing:0;font-family:Georgia,serif;font-style:italic;}
-    .el-brand-sub{font-size:7px;font-weight:700;letter-spacing:.42em;margin-top:4px;}
+    .el-brand{display:flex;align-items:center;justify-content:center;color:#56375c;line-height:1;direction:ltr;}
+    .el-brand-logo{display:block;width:auto;height:54px;max-width:150px;object-fit:contain;filter:contrast(1.08) saturate(1.02);}
     .el-navlinks{display:flex;align-items:center;gap:clamp(14px,2vw,28px);font-size:13px;font-weight:700;color:var(--muted);direction:rtl;}
     .el-actions{display:flex;align-items:center;gap:10px;}
     .el-icon-btn{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--ink);display:grid;place-items:center;position:relative;}
@@ -180,8 +179,7 @@
         <a href="index.html#reviews">نظرات</a>
       </div>
       <a class="el-brand" href="index.html" aria-label="ELORIA">
-        <span class="el-brand-logo">Eloria</span>
-        <span class="el-brand-sub">COSMETICS</span>
+        <img class="el-brand-logo" src="assets/eloria/eloria-logo.svg" alt="ELORIA">
       </a>
     </nav>
 

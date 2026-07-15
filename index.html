@@ -119,46 +119,21 @@
       background:transparent;
     }
     .el-brand-logo{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:3px;
-      direction:ltr;
-      color:#5f4164;
-      font-family:Georgia,"Times New Roman",serif;
-      font-size:38px;
-      font-weight:800;
-      line-height:.86;
-      letter-spacing:0;
+      display:block;
+      width:auto;
+      height:58px;
+      max-width:100%;
+      object-fit:contain;
       transform-origin:center;
-      animation:el-logo-breathe 3.8s ease-in-out infinite;
-      transition:transform .3s var(--ease),filter .3s ease,color .3s ease;
-      text-shadow:0 7px 18px rgba(91,58,92,.18);
+      filter:contrast(1.08) saturate(1.02) drop-shadow(0 7px 18px rgba(91,58,92,.18));
+      transition:transform .3s var(--ease),filter .3s ease;
     }
-    .el-brand-flower{
-      width:.52em;
-      height:.52em;
-      color:inherit;
-      opacity:.82;
-      flex:0 0 auto;
-      transform-origin:center;
-      animation:el-flower-pulse 3.8s ease-in-out infinite;
-    }
-    .el-brand-sub{
-      margin-top:5px;
-      color:rgba(91,58,92,.58);
-      font-size:7px;
-      font-weight:800;
-      line-height:1;
-      letter-spacing:0;
-    }
-    .el-brand:hover .el-brand-logo{transform:translateY(-1px) scale(1.018);color:#56375c;filter:contrast(1.18) saturate(1.08) drop-shadow(0 10px 22px rgba(91,58,92,.22));}
+    .el-brand:hover .el-brand-logo{transform:translateY(-1px) scale(1.018);filter:contrast(1.18) saturate(1.08) drop-shadow(0 10px 22px rgba(91,58,92,.22));}
     .el-nav.is-scrolled .el-brand{background:transparent;}
     .el-nav.is-scrolled .el-brand,
     .el-nav.is-scrolled .el-actions,
     .el-nav.is-scrolled .el-navlinks{height:50px;}
-    .el-nav.is-scrolled .el-brand-logo{font-size:31px;}
-    .el-nav.is-scrolled .el-brand-sub{font-size:6px;margin-top:3px;}
+    .el-nav.is-scrolled .el-brand-logo{height:48px;}
     .el-navlinks{order:2;flex:1 1 auto;align-self:center;min-height:58px;display:flex;align-items:center;justify-content:center;gap:clamp(14px,1.55vw,28px);font-size:14px;font-weight:700;color:rgba(43,32,56,.9);direction:rtl;}
     .el-navlink{position:relative;white-space:nowrap;display:inline-flex;align-items:center;height:44px;}
     .el-navlink:after{
@@ -712,9 +687,7 @@
       .el-icon-btn svg{width:20px;height:20px;}
       .el-brand{position:absolute;left:min(calc(100vw - 150px),240px);right:auto;top:12px;width:132px;height:46px;padding:0;justify-content:center;overflow:visible;background:transparent;border:0;}
       .el-actions{position:absolute;left:18px;top:12px;width:auto;height:48px;}
-      .el-brand-logo{font-size:28px;}
-      .el-brand-flower{width:.52em;height:.52em;}
-      .el-brand-sub{font-size:5px;margin-top:3px;}
+      .el-brand-logo{height:42px;}
       .el-hero{min-height:91svh;}
       .el-hero-content{padding-top:96px;}
       .el-hero p{max-width:320px;}
@@ -741,7 +714,7 @@
     }
     @media (prefers-reduced-motion:reduce){
       *,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.001ms!important;}
-      .el-brand-logo,.el-brand-flower,.el-partner-track{animation:none!important;}
+      .el-brand-logo,.el-partner-track{animation:none!important;}
       .el-hero video{display:none;}
       .el-hero{background:#d9cfe3 url("assets/eloria/ba-after.jpeg") center/cover no-repeat;}
     }
@@ -751,21 +724,7 @@
   <div class="el-app" id="app">
     <nav class="el-nav" id="nav" aria-label="ناوبری اصلی">
       <a class="el-brand" href="#top" aria-label="ELORIA">
-        <span class="el-brand-logo" aria-hidden="true">
-          <span>El</span>
-          <svg class="el-brand-flower" viewBox="0 0 40 40" focusable="false">
-            <g fill="currentColor" transform="translate(20 20)">
-              <ellipse cx="0" cy="-9.2" rx="4.6" ry="9.4"></ellipse>
-              <ellipse cx="0" cy="-9.2" rx="4.6" ry="9.4" transform="rotate(72)"></ellipse>
-              <ellipse cx="0" cy="-9.2" rx="4.6" ry="9.4" transform="rotate(144)"></ellipse>
-              <ellipse cx="0" cy="-9.2" rx="4.6" ry="9.4" transform="rotate(216)"></ellipse>
-              <ellipse cx="0" cy="-9.2" rx="4.6" ry="9.4" transform="rotate(288)"></ellipse>
-              <circle r="3.1"></circle>
-            </g>
-          </svg>
-          <span>ria</span>
-        </span>
-        <span class="el-brand-sub" aria-hidden="true">COSMETICS</span>
+        <img class="el-brand-logo" src="assets/eloria/eloria-logo.svg" alt="ELORIA">
       </a>
       <div class="el-navlinks">
         <a class="el-navlink" href="#categories">فروشگاه</a>
